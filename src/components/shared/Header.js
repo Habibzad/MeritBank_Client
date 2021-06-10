@@ -30,7 +30,7 @@ function Header() {
                         <NavDropdown
                             id="d3"
                             title={loggedInUser}
-                            menuVariant="dark"
+                            menuvariant="dark"
                         >
                             <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
                         </NavDropdown>
