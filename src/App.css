@@ -118,40 +118,11 @@ body{
   margin: 30px auto
 }
 
-.page-footer{
-  /* margin-top: 20px; */
-}
 
-
-
-/* .admin-container{
-  position: relative;
-} */
 .admin-container {
   display: flex;
   flex-direction: row;
 }
-
-.aside{
-  padding: 15px;
-  /* width: 200px; */
-  /* height: 100vh; */
-  background-color: #000000;
-  color: #fff;
-  /* position: fixed;
-  top: 60px;
-  left: 0;
-  z-index: 100; */
-  border: 1px solid green;
-}
-
-.aside a{
-
-  color: #fff;
-
-}
-
-
 
 .login-btn{
   color: #ffffff
@@ -172,7 +143,7 @@ body{
 }
 
 .menu-link{
-  padding: 10px;
+  /* padding: 10px; */
   color: #ffffff;
   border-bottom: 5px solid #343A40;
   /* line-height: 34px; */

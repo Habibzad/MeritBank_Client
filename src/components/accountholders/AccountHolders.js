@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import { Button } from 'react-bootstrap'
 import { BASE_URL_AUTHENTICATE } from '../../ResourceEndpoints';
-import { FormProvider } from 'antd/lib/form/context'
 
 function AccountHolders() {
     const [store] = useContext(AuthorizationContext)
