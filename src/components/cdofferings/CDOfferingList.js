@@ -1,8 +1,7 @@
 import { AuthorizationContext } from '../../AuthorizationContext'
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
-import { Button } from 'react-bootstrap'
 import { CD_OFFERINGS } from '../../ResourceEndpoints';
 
 function CDOfferingList() {
@@ -12,6 +11,10 @@ function CDOfferingList() {
     const jwt = store.jwt
 
     const [cdOfferings, setCDOfferings] = useState([])
+
+    useEffect(() => {
+        showAccountHolders()
+    }, [])
 
     async function showAccountHolders() {
         axios.get(CD_OFFERINGS, {
@@ -34,10 +37,9 @@ function CDOfferingList() {
 
     return (
         <div className="container">
-            <h1 className="text-center">Account Holders List</h1>
-            <Button onClick={showAccountHolders} variant="primary">Show Account Holders</Button>
-            <div className="row">
-                <table className="table table-striped table-bordered">
+            <h3 className="component-header">CD Offerings</h3>
+            <div className="">
+                <table style={{ backgroundColor: 'white', textAlign: 'center' }} className="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -45,7 +47,7 @@ function CDOfferingList() {
                             <th>Term</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody >
                         {
                             cdOfferings.map(cdOffering =>
                                 <tr key={cdOffering.id}>

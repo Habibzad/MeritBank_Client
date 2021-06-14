@@ -1,0 +1,121 @@
+import { AuthorizationContext } from '../../AuthorizationContext'
+import React, { useState, useContext } from 'react'
+import { Redirect } from 'react-router-dom'
+import { Form, Button, Col, Row, Alert } from 'react-bootstrap'
+import { BASE_URL_AUTHENTICATE } from '../../ResourceEndpoints';
+
+function AddAccountHolder() {
+    const [store] = useContext(AuthorizationContext)
+    const isLoggedIn = store.isLoggedIn;
+    const role = store.role;
+    const jwt = store.jwt
+
+    const [firstName, setFirstName] = useState('')
+    const [middleName, setMiddleName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [ssn, setSSN] = useState('')
+
+    const [successMessage, setSuccessMessage] = useState('')
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        createAccountHolder()
+        setFirstName('')
+        setMiddleName('')
+        setLastName('')
+        setSSN('')
+    }
+
+    async function createAccountHolder() {
+        const myHeaders = {
+            "Authorization": "Bearer " + jwt,
+            "Content-Type": "application/json"
+        }
+
+        var payload = JSON.stringify({
+            "firstName": firstName,
+            "middleName": middleName,
+            "lastName": lastName,
+            "ssn": ssn
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: payload,
+            redirect: 'follow'
+        };
+
+        fetch(BASE_URL_AUTHENTICATE, requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                console.log(result)
+                setSuccessMessage("Account Holder Successfully Added!")
+            })
+            .catch(error => console.log('error', error));
+    }
+
+    if (!isLoggedIn && role !== "[ROLE_ADMIN]") {
+        return <Redirect to="/user" />
+    }
+    return (
+        <div>
+            {successMessage &&
+                <Alert variant='success'>{successMessage}</Alert>}
+            <h3 className="component-header">Create Account Holder</h3>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+                    <Form.Label column sm={2}>First Name</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            type="text"
+                            placeholder="First Name"
+                            value={firstName}
+                            onChange={e => setFirstName(e.target.value)}
+                        />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
+                    <Form.Label column sm={2}>Middle Name</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            type="text"
+                            placeholder="Middle Name"
+                            value={middleName}
+                            onChange={e => setMiddleName(e.target.value)}
+                        />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
+                    <Form.Label column sm={2}>Last Name</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            type="text"
+                            placeholder="Last Name"
+                            value={lastName}
+                            onChange={e => setLastName(e.target.value)}
+                        />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
+                    <Form.Label column sm={2}>SSN</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            type="text"
+                            placeholder="Social Security Number"
+                            value={ssn}
+                            onChange={e => setSSN(e.target.value)}
+                        />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3">
+                    <Col sm={{ span: 10, offset: 2 }}>
+                        <Button variant="dark" type="submit">Submit</Button>
+                    </Col>
+                </Form.Group>
+            </Form>
+        </div>
+    )
+}
+
+export default AddAccountHolder

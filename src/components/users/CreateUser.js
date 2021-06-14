@@ -1,0 +1,123 @@
+import { AuthorizationContext } from '../../AuthorizationContext'
+import React, { useState, useContext } from 'react'
+import { Redirect, useHistory } from 'react-router-dom'
+import { Form, Button, Col, Row, Alert } from 'react-bootstrap'
+import { CREATE_USER } from '../../ResourceEndpoints';
+
+function CreateUser() {
+    const [store] = useContext(AuthorizationContext)
+    const isLoggedIn = store.isLoggedIn;
+    const role = store.role;
+    const jwt = store.jwt
+    const history = useHistory();
+    const [username, setUserName] = useState('')
+    const [password, setPassword] = useState('')
+    const [active, setActive] = useState('')
+    const [userRole, setUserRole] = useState('')
+    const [successMessage, setSuccessMessage] = useState('')
+
+    let enabled;
+    active === "Enabled" ? enabled = true : enabled = false
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log('username: ', username, 'password', password, 'active: ', enabled, 'role', userRole)
+        createUser()
+        setUserName('')
+        setPassword('')
+    }
+
+    async function createUser() {
+        const myHeaders = {
+            "Authorization": "Bearer " + jwt,
+            "Content-Type": "application/json"
+        }
+
+        const payload = JSON.stringify({
+            "userName": username,
+            "password": password,
+            "active": enabled,
+            "roles": userRole
+        });
+
+        const requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: payload,
+            redirect: 'follow'
+        };
+
+        fetch(CREATE_USER, requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                console.log(result)
+                setSuccessMessage("User Created Successfully!")
+                setUserName('')
+                setPassword('')
+                setActive('')
+                setUserRole('')
+                history.push('/admin/users-list')
+            })
+            .catch(error => console.log('error', error));
+
+    }
+
+    if (!isLoggedIn && role !== "[ROLE_ADMIN]") {
+        return <Redirect to="/user" />
+    }
+    return (
+        <div>
+            {successMessage &&
+                <Alert variant='success'>{successMessage}</Alert>}
+            <h3 className="component-header">Create User</h3>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+                    <Form.Label column sm={2}>User Name</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            type="text"
+                            placeholder="User Name"
+                            value={username}
+                            onChange={e => setUserName(e.target.value)}
+                        />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
+                    <Form.Label column sm={2}> Password</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            type="text"
+                            placeholder="Password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                        />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3">
+                    <Form.Label column sm={2}> Active</Form.Label>
+                    <select className="form-select" onChange={e => setActive(e.target.value)}>
+                        <option >Select</option>
+                        <option >Enabled</option>
+                        <option >Disabled</option>
+                    </select>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3">
+                    <Form.Label column sm={2}> Roles</Form.Label>
+                    <select className="form-select" onChange={e => setUserRole(e.target.value)}>
+                        <option >Select</option>
+                        <option value="ROLE_USER">User</option>
+                        <option value="ROLE_ADMIN">Admin</option>
+                    </select>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3">
+                    <Col sm={{ span: 10, offset: 2 }}>
+                        <Button variant="dark" type="submit">Submit</Button>
+                        <Button variant="info" onClick={() => history.push('/admin/users-list')} style={{ marginLeft: '20px' }}>Cancel</Button>
+                    </Col>
+                </Form.Group>
+            </Form>
+        </div>
+    )
+}
+
+export default CreateUser
