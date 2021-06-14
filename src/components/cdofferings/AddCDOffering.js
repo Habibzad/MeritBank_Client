@@ -1,6 +1,6 @@
 import { AuthorizationContext } from '../../AuthorizationContext'
 import React, { useState, useContext } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import { Form, Button, Alert } from 'react-bootstrap'
 import { CD_OFFERINGS } from '../../ResourceEndpoints';
 
@@ -9,7 +9,7 @@ function AddCDOffering() {
     const isLoggedIn = store.isLoggedIn;
     const role = store.role;
     const jwt = store.jwt
-
+    const history = useHistory();
     const [interestRate, setInterestRate] = useState('');
     const [term, setTerm] = useState('')
     const [successMessage, setSuccessMessage] = useState('')
@@ -44,6 +44,7 @@ function AddCDOffering() {
             .then(result => {
                 console.log('result', result)
                 setSuccessMessage('CD Offering Added!')
+                history.push('/admin/addfferingslist')
             })
             .catch(error => console.log('error', error));
 
@@ -57,7 +58,7 @@ function AddCDOffering() {
 
     return (
         <div className="container">
-            { successMessage &&
+            {successMessage &&
                 <Alert variant='success'>{successMessage}</Alert>}
             <Form onSubmit={handleSubmit}>
                 <h3 className="component-header">Add CD Offering</h3>
@@ -72,6 +73,7 @@ function AddCDOffering() {
                 </Form.Group>
 
                 <Button variant="dark" type="submit">Submit</Button>
+                <Button variant="info" onClick={() => history.push('/admin/addfferingslist')} style={{ marginLeft: '20px' }}>Cancel</Button>
             </Form>
         </div>
     )

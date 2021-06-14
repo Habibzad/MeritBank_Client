@@ -57,14 +57,9 @@ function AdminDash() {
                 <Router className="">
                     <Nav bg="light" variant="primary" className="menu">
                         <Nav.Link ><Link className="admin-main" to={url}>Home</Link></Nav.Link>
-                        <Nav.Link ><Link className="admin-main" to={url + usersList}>Display Users</Link></Nav.Link>
+                        <Nav.Link ><Link className="admin-main" to={url + usersList}>Users</Link></Nav.Link>
 
-                        {/* <NavDropdown title="Users">
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + usersList}>Display Users</Link></NavDropdown.Item>
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + createUser}>Create User</Link></NavDropdown.Item>
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + deleteUser}>Delete User</Link></NavDropdown.Item>
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + updateUser}>Update User</Link></NavDropdown.Item>
-                        </NavDropdown> */}
+
                         <NavDropdown title="Accounts">
                             <NavDropdown.Item ><Link className="dropdown_menu" to={url + accountholders}>Display Account Information</Link></NavDropdown.Item>
                             <NavDropdown.Item ><Link className="dropdown_menu" to={url + accountholders}>Create Account</Link></NavDropdown.Item>
@@ -79,8 +74,6 @@ function AdminDash() {
                         </NavDropdown>
                         <NavDropdown title="CDOfferings">
                             <NavDropdown.Item ><Link className="dropdown_menu" to={url + addfferingslist}>CDOfferings</Link></NavDropdown.Item>
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + addcdofferings}>Add CDOffering</Link></NavDropdown.Item>
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + deleteCDOffering}>Delete CDOffering</Link></NavDropdown.Item>
                             <NavDropdown.Item ><Link className="dropdown_menu" to={url + clearOfferings}>Clear CDOfferings</Link></NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="Transactions">

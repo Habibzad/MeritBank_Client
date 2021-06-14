@@ -20,20 +20,20 @@ function DeleteCDOffering() {
             "Content-Type": "application/json"
         }
 
-        const raw = JSON.stringify({
+        const payload = JSON.stringify({
             "id": id
         });
 
         const requestOptions = {
             method: 'DELETE',
             headers: myHeaders,
-            body: raw,
+            body: payload,
             redirect: 'follow'
         };
 
         fetch(DELETE_CDOFFERING, requestOptions)
-            .then(response => response.text())
-            .then(result => setSuccessMessage(result))
+            .then(response => response.json())
+            .then(result => console.log(result))
             .catch(error => console.log('error', error));
     }
 

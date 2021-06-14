@@ -5,16 +5,17 @@ import { Form, Button, Col, Row, Alert } from 'react-bootstrap'
 import { CREATE_USER } from '../../ResourceEndpoints';
 
 function CreateUser() {
-    const [store] = useContext(AuthorizationContext)
+    const [store, setStore] = useContext(AuthorizationContext)
     const isLoggedIn = store.isLoggedIn;
     const role = store.role;
     const jwt = store.jwt
+    const successMessage = store.successMessage;
     const history = useHistory();
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [active, setActive] = useState('')
     const [userRole, setUserRole] = useState('')
-    const [successMessage, setSuccessMessage] = useState('')
+
 
     let enabled;
     active === "Enabled" ? enabled = true : enabled = false
@@ -51,7 +52,7 @@ function CreateUser() {
             .then(response => response.json())
             .then(result => {
                 console.log(result)
-                setSuccessMessage("User Created Successfully!")
+                setStore({ ...store, successMessage: "User Created Successfully!" })
                 setUserName('')
                 setPassword('')
                 setActive('')

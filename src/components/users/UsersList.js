@@ -1,6 +1,6 @@
 import { AuthorizationContext } from '../../AuthorizationContext'
 import React, { useState, useEffect, useContext } from 'react'
-import { Redirect, Link, useHistory } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import { USERS } from '../../ResourceEndpoints';
 import { Table, Alert } from 'react-bootstrap'
 
@@ -20,7 +20,7 @@ function UsersList() {
     // const [id, setID] = useState('')
 
     const displayUsers = async () => {
-        var myHeaders = {
+        const myHeaders = {
             "Authorization": "Bearer " + jwt,
             "Content-Type": "application/json"
         }
@@ -35,6 +35,7 @@ function UsersList() {
             .then(result => setUsers(result))
             .catch(error => console.log('error', error));
     }
+
     async function deleteUser(id) {
 
         console.log(id)
@@ -98,7 +99,7 @@ function UsersList() {
                             <tr key={user.id}>
                                 <td>
                                     <i className="fas fa-pencil-alt text-warning" onClick={() => updateUser(user.id)} style={{ marginRight: '30px', cursor: 'pointer' }}></i>
-                                    <i className="far fa-trash-alt text-danger" style={{ cursor: 'pointer' }}
+                                    <i className="fas fa-user-slash text-danger" style={{ cursor: 'pointer' }}
                                         onClick={() => {
                                             if (window.confirm(`Are you sure you want to delete ${user.userName}`)) {
                                                 deleteUser(user.id);

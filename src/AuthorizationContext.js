@@ -8,7 +8,8 @@ export const AuthorizationProvider = (props) => {
         jwt: '',
         role: '',
         username: '',
-        isLoggedIn: false
+        isLoggedIn: false,
+        successMessage: ''
     })
 
     React.useEffect(() => {
