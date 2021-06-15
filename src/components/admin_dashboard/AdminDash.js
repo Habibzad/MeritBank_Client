@@ -26,22 +26,24 @@ import TransactionsList from '../transactions/TransactionsList';
 import TransferTransaction from '../transactions/TransferTransaction';
 import DepositTransaction from '../transactions/DepositTransaction';
 import WithdrawTransaction from '../transactions/WithdrawTransaction';
+import Accounts from '../accounts/Accounts';
 import './admin.css'
 
 //Component URLs
+const addAccountHolder = '/add-account-holder'
 const addfferingslist = '/addfferingslist'
 const accountholders = '/accountholders'
+const accounts = '/accounts'
 const addcdofferings = '/addcdofferomg'
-const usersList = '/users-list'
+const clearOfferings = '/clear-offerings'
 const createUser = '/create-user'
 const deleteUser = '/delete-user'
-const updateUser = '/udate-user'
 const deleteCDOffering = '/delete-cdoffering'
-const clearOfferings = '/clear-offerings'
-const addAccountHolder = '/add-account-holder'
+const deposit = '/deposit'
 const transactions = '/transactions'
 const transfer = '/transfer'
-const deposit = '/deposit'
+const updateUser = '/udate-user'
+const usersList = '/users-list'
 const withdraw = '/withdraw'
 
 
@@ -59,7 +61,7 @@ function AdminDash() {
     return (
         <div className="container">
             <div className="dash-header">
-                <h4>Hello, {user}</h4>
+                <h4 style={{ color: '#5086A8', margin: '0', lineHeight: '60px', paddingLeft: '5px' }}>Hello, {user}</h4>
             </div>
             <div >
                 <Router className="">
@@ -69,7 +71,7 @@ function AdminDash() {
 
 
                         <NavDropdown title="Accounts">
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + accountholders}>Display Account Information</Link></NavDropdown.Item>
+                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + accounts}>Accounts</Link></NavDropdown.Item>
                             <NavDropdown.Item ><Link className="dropdown_menu" to={url + accountholders}>Create Account</Link></NavDropdown.Item>
                             <NavDropdown.Item ><Link className="dropdown_menu" to={url + accountholders}>Update Account</Link></NavDropdown.Item>
                             <NavDropdown.Item ><Link className="dropdown_menu" to={url + accountholders}>Delete Account</Link></NavDropdown.Item>
@@ -85,7 +87,7 @@ function AdminDash() {
                             <NavDropdown.Item ><Link className="dropdown_menu" to={url + clearOfferings}>Clear CDOfferings</Link></NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="Transactions">
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + transactions}>Transactions List</Link></NavDropdown.Item>
+                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + transactions}>All Transactions</Link></NavDropdown.Item>
                             <NavDropdown.Item ><Link className="dropdown_menu" to={url + transfer}>Transfer</Link></NavDropdown.Item>
                             <NavDropdown.Item ><Link className="dropdown_menu" to={url + deposit}>Deposit</Link></NavDropdown.Item>
                             <NavDropdown.Item ><Link className="dropdown_menu" to={url + withdraw}>Withdraw</Link></NavDropdown.Item>
@@ -107,6 +109,9 @@ function AdminDash() {
                             </Route>
                             <Route exact path={url + updateUser}>
                                 <UpdateUser />
+                            </Route>
+                            <Route exact path={url + accounts}>
+                                <Accounts />
                             </Route>
                             <Route exact path={url + accountholders}>
                                 <AccountHolders />

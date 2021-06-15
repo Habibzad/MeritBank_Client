@@ -9,20 +9,18 @@ function CreateUser() {
     const isLoggedIn = store.isLoggedIn;
     const role = store.role;
     const jwt = store.jwt
-    const successMessage = store.successMessage;
     const history = useHistory();
+
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [active, setActive] = useState('')
     const [userRole, setUserRole] = useState('')
-
 
     let enabled;
     active === "Enabled" ? enabled = true : enabled = false
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('username: ', username, 'password', password, 'active: ', enabled, 'role', userRole)
         createUser()
         setUserName('')
         setPassword('')
@@ -68,8 +66,6 @@ function CreateUser() {
     }
     return (
         <div>
-            {successMessage &&
-                <Alert variant='success'>{successMessage}</Alert>}
             <h3 className="component-header">Create User</h3>
             <Form onSubmit={handleSubmit}>
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
@@ -87,7 +83,7 @@ function CreateUser() {
                     <Form.Label column sm={2}> Password</Form.Label>
                     <Col sm={10}>
                         <Form.Control
-                            type="text"
+                            type="password"
                             placeholder="Password"
                             value={password}
                             onChange={e => setPassword(e.target.value)}

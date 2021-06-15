@@ -5,19 +5,21 @@ import { USERS } from '../../ResourceEndpoints';
 import { Table, Alert } from 'react-bootstrap'
 
 function UsersList() {
-    const [store] = useContext(AuthorizationContext)
+    const [store, setStore] = useContext(AuthorizationContext)
     const isLoggedIn = store.isLoggedIn;
     const role = store.role;
     const jwt = store.jwt
     const history = useHistory();
-    const [successMessage, setSuccessMessage] = useState('')
+    const successMessage = store.successMessage;
 
+    if (successMessage !== '') {
+        setTimeout(() => setStore({ ...store, successMessage: '' }), 2000)
+    }
     useEffect(() => {
         displayUsers();
     }, [])
 
     const [users, setUsers] = useState([])
-    // const [id, setID] = useState('')
 
     const displayUsers = async () => {
         const myHeaders = {
@@ -56,8 +58,8 @@ function UsersList() {
 
         fetch(USERS, requestOptions)
             .then(response => {
-                setSuccessMessage("User deleted successfully!")
                 displayUsers();
+                setStore({ ...store, successMessage: 'User deleted successfully!' })
             })
             .catch(error => console.log('error', error));
     }
@@ -73,9 +75,10 @@ function UsersList() {
 
     return (
         <div>
-            <h3 className="component-header">Users List</h3>
             {successMessage &&
-                <Alert variant='success'>{successMessage}</Alert>}
+                <Alert style={{ position: 'fixed', top: '0' }} variant='success'>{successMessage}</Alert>}
+            <h3 className="component-header">Users List</h3>
+
             <Table striped bordered hover style={{ backgroundColor: 'white', textAlign: 'center' }}>
                 <thead>
                     <tr>

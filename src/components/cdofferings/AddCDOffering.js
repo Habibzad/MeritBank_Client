@@ -5,14 +5,13 @@ import { Form, Button, Alert } from 'react-bootstrap'
 import { CD_OFFERINGS } from '../../ResourceEndpoints';
 
 function AddCDOffering() {
-    const [store] = useContext(AuthorizationContext)
+    const [store, setStore] = useContext(AuthorizationContext)
     const isLoggedIn = store.isLoggedIn;
     const role = store.role;
     const jwt = store.jwt
     const history = useHistory();
     const [interestRate, setInterestRate] = useState('');
     const [term, setTerm] = useState('')
-    const [successMessage, setSuccessMessage] = useState('')
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -43,7 +42,7 @@ function AddCDOffering() {
             .then(response => response.json())
             .then(result => {
                 console.log('result', result)
-                setSuccessMessage('CD Offering Added!')
+                setStore({ ...store, successMessage: 'CD Offering added successfully!' })
                 history.push('/admin/addfferingslist')
             })
             .catch(error => console.log('error', error));
@@ -58,8 +57,6 @@ function AddCDOffering() {
 
     return (
         <div className="container">
-            {successMessage &&
-                <Alert variant='success'>{successMessage}</Alert>}
             <Form onSubmit={handleSubmit}>
                 <h3 className="component-header">Add CD Offering</h3>
                 <Form.Group className="mb-3" controlId="formBasicEmail">

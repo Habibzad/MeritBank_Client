@@ -44,7 +44,10 @@ function TransferTransaction() {
 
         fetch("http://localhost:8080/api/transfer", requestOptions)
             .then(response => response.text())
-            .then(result => setSuccessMessage(result))
+            .then(result => {
+                setSuccessMessage(result)
+                history.push('/admin/transactions')
+            })
             .catch(error => console.log('error', error));
     }
 
@@ -54,8 +57,6 @@ function TransferTransaction() {
 
     return (
         <div>
-            {successMessage &&
-                <Alert variant='success'>{successMessage}</Alert>}
             <h3 className="component-header">Transfer</h3>
             <Form onSubmit={handleSubmit}>
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">

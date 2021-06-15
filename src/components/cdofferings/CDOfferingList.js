@@ -2,16 +2,22 @@ import { AuthorizationContext } from '../../AuthorizationContext'
 import React, { useState, useEffect, useContext } from 'react'
 import { Redirect, useHistory } from 'react-router-dom'
 import axios from 'axios'
+import { Table, Alert } from 'react-bootstrap'
+
 import { CD_OFFERINGS, DELETE_CDOFFERING } from '../../ResourceEndpoints';
 
 function CDOfferingList() {
-    const [store] = useContext(AuthorizationContext)
+    const [store, setStore] = useContext(AuthorizationContext)
     const isLoggedIn = store.isLoggedIn;
     const role = store.role;
     const jwt = store.jwt
     const history = useHistory();
     const [cdOfferings, setCDOfferings] = useState([])
+    const successMessage = store.successMessage;
 
+    if (successMessage !== '') {
+        setTimeout(() => setStore({ ...store, successMessage: '' }), 2000)
+    }
     useEffect(() => {
         showAOfferings()
     }, [])
@@ -49,7 +55,7 @@ function CDOfferingList() {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8080/api/CDOfferings", requestOptions)
+        fetch(DELETE_CDOFFERING, requestOptions)
             .then(response => response.text())
             .then(result => {
                 showAOfferings()
@@ -64,18 +70,20 @@ function CDOfferingList() {
 
     return (
         <div className="container">
+            {successMessage &&
+                <Alert variant='success'>{successMessage}</Alert>}
             <h3 className="component-header">CD Offerings</h3>
             <div className="">
-                <table style={{ backgroundColor: 'white', textAlign: 'center' }} className="table table-striped table-bordered">
+                <Table style={{ backgroundColor: 'white', textAlign: 'center' }} className="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <ht>
+                            <th>
                                 <i
                                     className="fas fa-plus text-primary"
-                                    style={{ cursor: 'pointer', marginTop: '17px' }}
+                                    style={{ cursor: 'pointer' }}
                                     onClick={() => history.push('/admin/addcdofferomg')}>
                                 </i>
-                            </ht>
+                            </th>
                             <th>ID</th>
                             <th>Interest Rate</th>
                             <th>Term</th>
@@ -100,7 +108,7 @@ function CDOfferingList() {
                                 </tr>)
                         }
                     </tbody>
-                </table>
+                </Table>
             </div>
         </div>
     )
