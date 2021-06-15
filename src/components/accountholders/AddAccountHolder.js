@@ -1,6 +1,6 @@
 import { AuthorizationContext } from '../../AuthorizationContext'
 import React, { useState, useContext } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import { Form, Button, Col, Row, Alert } from 'react-bootstrap'
 import { BASE_URL_AUTHENTICATE } from '../../ResourceEndpoints';
 
@@ -9,6 +9,7 @@ function AddAccountHolder() {
     const isLoggedIn = store.isLoggedIn;
     const role = store.role;
     const jwt = store.jwt
+    const history = useHistory();
 
     const [firstName, setFirstName] = useState('')
     const [middleName, setMiddleName] = useState('')
@@ -51,6 +52,7 @@ function AddAccountHolder() {
             .then(result => {
                 console.log(result)
                 setSuccessMessage("Account Holder Successfully Added!")
+                history.push('/admin/accountholders')
             })
             .catch(error => console.log('error', error));
     }
@@ -58,10 +60,9 @@ function AddAccountHolder() {
     if (!isLoggedIn && role !== "[ROLE_ADMIN]") {
         return <Redirect to="/user" />
     }
+
     return (
         <div>
-            {successMessage &&
-                <Alert variant='success'>{successMessage}</Alert>}
             <h3 className="component-header">Create Account Holder</h3>
             <Form onSubmit={handleSubmit}>
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
@@ -111,6 +112,7 @@ function AddAccountHolder() {
                 <Form.Group as={Row} className="mb-3">
                     <Col sm={{ span: 10, offset: 2 }}>
                         <Button variant="dark" type="submit">Submit</Button>
+                        <Button variant="info" onClick={() => history.push('/admin/accountholders')} style={{ marginLeft: '20px' }}>Cancel</Button>
                     </Col>
                 </Form.Group>
             </Form>

@@ -76,12 +76,7 @@ function AdminDash() {
                             <NavDropdown.Item ><Link className="dropdown_menu" to={url + accountholders}>Update Account</Link></NavDropdown.Item>
                             <NavDropdown.Item ><Link className="dropdown_menu" to={url + accountholders}>Delete Account</Link></NavDropdown.Item>
                         </NavDropdown>
-                        <NavDropdown title="AccountHolders">
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + accountholders}>AccountHolders List</Link></NavDropdown.Item>
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + addAccountHolder}>Create AccountHolder</Link></NavDropdown.Item>
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + accountholders}>Delete AccountHolder</Link></NavDropdown.Item>
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + accountholders}>Update AccountHolder</Link></NavDropdown.Item>
-                        </NavDropdown>
+                        <Nav.Link ><Link className="admin-main" to={url + accountholders}>AccountHolders</Link></Nav.Link>
                         <NavDropdown title="CDOfferings">
                             <NavDropdown.Item ><Link className="dropdown_menu" to={url + addfferingslist}>CDOfferings</Link></NavDropdown.Item>
                             <NavDropdown.Item ><Link className="dropdown_menu" to={url + clearOfferings}>Clear CDOfferings</Link></NavDropdown.Item>

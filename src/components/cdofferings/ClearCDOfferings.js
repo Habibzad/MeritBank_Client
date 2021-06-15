@@ -36,14 +36,18 @@ function ClearCDOfferings() {
     }
     return (
         <div>
-            { successMessage &&
+            {successMessage &&
                 <Alert variant='success'>{successMessage}</Alert>}
             <h3 className="component-header">Clear CD Offering</h3>
             <Card className="text-center">
                 <Card.Body>
                     <Card.Title>Click the submit button to clear all CD offerings</Card.Title>
                     <Card.Text> Are you sure?</Card.Text>
-                    <Button variant="dark" type="submit" onClick={handleSubmit}>Submit</Button>
+                    <Button variant="danger" type="submit" onClick={() => {
+                        if (window.confirm(`Are you sure you want to clear all CD Offerings? `)) {
+                            handleSubmit();
+                        }
+                    }}>Submit</Button>
                 </Card.Body>
                 <Card.Footer className="text-muted">Disclaimer: CD Offerings cleared cannot be recovered!</Card.Footer>
             </Card>
