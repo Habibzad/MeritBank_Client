@@ -1,10 +1,36 @@
 import React from 'react';
 import '../App.css';
-
+import { Navbar, Container } from 'react-bootstrap'
 const Landing = () => {
-
     return (
         <div className="App">
+            <Navbar className="navbar navbar-expand-lg shadow navbar-light bg-white">
+                <Container>
+                    <img src="/images/logo.png" height="35" alt="logo" />
+                    <ul className="nav ml-auto nav-flex-icons">
+                        <li className="nav-item">
+                            <a className="nav-link waves-effect waves-light" href="https://www.meritamerica.org/">
+                                Checking
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link waves-effect waves-light" href="https://www.meritamerica.org/">
+                                Savings
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link waves-effect waves-light" href="https://www.meritamerica.org/">
+                                CD Accounts
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link waves-effect waves-light" href="https://www.meritamerica.org/">
+                                IRA Accounts
+                            </a>
+                        </li>
+                    </ul>
+                </Container>
+            </Navbar>
             <div className="mb-3 b12" >
                 <div className="b13"></div>
             </div>
@@ -12,7 +38,6 @@ const Landing = () => {
                 <div className="d-flex flex-column text-white py-3 align-items-center">
                     <h3 className="h5 text-center">Stay in control of <br />your finances any time.</h3>
                     <h1 className="font-weight-bold text-center pb-3">Open The Account's You Need</h1>
-                    <a className="font-weight-bold btn btn-dark btn-lg mb-1 px-5 shadow" href="https://www.meritamerica.org/">Get Started</a>
                 </div>
             </div>
             <div className="container">
@@ -41,7 +66,7 @@ const Landing = () => {
                     <div className="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
                         <div className="card card-body text-center shadow rounded-lg">
                             <p><i className="grey-text fas fa-mobile-alt fa-3x"></i></p>
-                            <h4 className="grey-text">Access</h4>
+                            <h4 className="grey-text">Mobile Banking</h4>
                             <p className="grey-text">Lorem ipsum</p>
                         </div>
                     </div>
@@ -49,8 +74,8 @@ const Landing = () => {
             </div>
 
             <div className="text-center">
-                <div className="jumbotron">
-                    <h1 className="display-4">Hello, world!</h1>
+                <div className="jumbotron menu1" >
+                    <h1 className="display-4">Your Bank!</h1>
                     <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
                     <hr className="my-4" />
                     <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>

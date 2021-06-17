@@ -1,32 +1,31 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { AuthorizationContext } from '../AuthorizationContext'
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import axios from 'axios'
 import { BASE_URL_ADD } from '../ResourceEndpoints'
 import jwt_decode from "jwt-decode";
-import { Redirect } from 'react-router-dom'
 
 function Login() {
     const [store, setStore] = useContext(AuthorizationContext)
     const [isLoggedIn, setLoggedIn] = useState(false)
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const errorMessage = store.errorMessage
+    const history = useHistory();
 
     useEffect(() => {
         setLoggedIn(JSON.parse(localStorage.getItem('isLoggedIn')))
     }, [isLoggedIn])
 
+    if (errorMessage !== '') {
+        setTimeout(() => setStore({ ...store, errorMessage: '' }), 2000)
+    }
     //For page redirect
-    const history = useHistory();
 
     const user = {
         username: username,
         password: password
-    }
-
-    if (isLoggedIn) {
-        return <Redirect to="/" />
     }
 
     async function handleSubmit(e) {
@@ -42,6 +41,7 @@ function Login() {
             const isLoggedIn = true
             const decodedjwt = jwt_decode(res.data.jwt);
             const username = decodedjwt.sub;
+            console.log(decodedjwt)
 
             localStorage.setItem('jwt', JSON.stringify(jwt))
             localStorage.setItem('role', JSON.stringify(role))
@@ -54,7 +54,6 @@ function Login() {
                 username: username,
                 isLoggedIn: isLoggedIn
             });
-            // console.log('store from login onsubmit', { jwt: jwt, role: role, username: username, isLoggedIn: isLoggedIn })
 
             if (res.data != null) {
                 if (res.data.roles === "[ROLE_ADMIN]") {
@@ -66,11 +65,20 @@ function Login() {
             }
         }).catch(err => {
             console.log(err.message)
+            if (err.message === 'Request failed with status code 401') {
+                setStore({
+                    ...store,
+                    errorMessage: 'Invalid login credentials, please try again'
+                })
+            }
         })
     }
 
+
     return (
         <div className="container login" style={{ width: 400 }}>
+            {errorMessage &&
+                <Alert variant='warning'>{errorMessage}</Alert>}
             <Form onSubmit={e => handleSubmit(e)}>
                 <h2 className="text-center">Log In</h2>
                 <Form.Group controlId="formBasicEmail">
@@ -99,7 +107,7 @@ function Login() {
                 <Button
                     variant="dark"
                     type="submit"
-                    style={{ width: 360 }}>Login
+                    style={{ width: 360, marginTop: '20px' }}>Login
                 </Button>
             </Form>
         </div>

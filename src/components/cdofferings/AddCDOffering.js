@@ -1,16 +1,15 @@
 import { AuthorizationContext } from '../../AuthorizationContext'
 import React, { useState, useContext } from 'react'
-import { Redirect } from 'react-router-dom'
-import { Form, Button } from 'react-bootstrap'
+import { Redirect, useHistory } from 'react-router-dom'
+import { Form, Button, Alert } from 'react-bootstrap'
 import { CD_OFFERINGS } from '../../ResourceEndpoints';
-import axios from 'axios';
 
 function AddCDOffering() {
-    const [store] = useContext(AuthorizationContext)
+    const [store, setStore] = useContext(AuthorizationContext)
     const isLoggedIn = store.isLoggedIn;
     const role = store.role;
     const jwt = store.jwt
-
+    const history = useHistory();
     const [interestRate, setInterestRate] = useState('');
     const [term, setTerm] = useState('')
 
@@ -19,35 +18,37 @@ function AddCDOffering() {
         console.log("term", term, 'interestrate: ', interestRate)
         console.log('jwt: ', jwt)
 
-        const payload = {
-            'interestRate': interestRate,
-            'term': term
-        }
-
-        console.log('payload:', payload)
+        const num1 = interestRate;
+        const num2 = term;
 
         const myHeaders = {
-            "Authorization": "Bearer " + jwt,
+            "Authorization": `Bearer ${jwt}`,
             "Content-Type": "application/json"
         }
 
-        //Hard coded here
-        const raw = JSON.stringify({
-            "interestRate": 0.7,
-            "term": 20
+        const payload = JSON.stringify({
+            "interestRate": num1,
+            "term": num2
         });
 
         const requestOptions = {
             method: 'POST',
             headers: myHeaders,
-            body: raw,
+            body: payload,
             redirect: 'follow'
         };
 
         fetch(CD_OFFERINGS, requestOptions)
             .then(response => response.json())
-            .then(result => console.log(result))
+            .then(result => {
+                console.log('result', result)
+                setStore({ ...store, successMessage: 'CD Offering added successfully!' })
+                history.push('/admin/addfferingslist')
+            })
             .catch(error => console.log('error', error));
+
+        setInterestRate('')
+        setTerm('')
     }
 
     if (!isLoggedIn && role !== "[ROLE_ADMIN]") {
@@ -56,18 +57,20 @@ function AddCDOffering() {
 
     return (
         <div className="container">
-            <Form onSubmit={handleSubmit} style={{ width: 300 }}>
+            <Form onSubmit={handleSubmit}>
+                <h3 className="component-header">Add CD Offering</h3>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Interest Rate</Form.Label>
-                    <Form.Control value={interestRate} onChange={(e) => setInterestRate(e.target.value)} type="number" placeholder="Interest Rate" />
+                    <Form.Control value={interestRate} onChange={(e) => setInterestRate(e.target.value)} type="text" placeholder="Interest Rate" />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Term</Form.Label>
-                    <Form.Control value={term} onChange={(e) => setTerm(e.target.value)} type="number" placeholder="Term" />
+                    <Form.Control value={term} onChange={(e) => setTerm(e.target.value)} type="text" placeholder="Term" />
                 </Form.Group>
 
                 <Button variant="dark" type="submit">Submit</Button>
+                <Button variant="info" onClick={() => history.push('/admin/addfferingslist')} style={{ marginLeft: '20px' }}>Cancel</Button>
             </Form>
         </div>
     )
