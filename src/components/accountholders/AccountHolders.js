@@ -44,18 +44,18 @@ function AccountHolders() {
             "Content-Type": "application/json"
         }
 
-        const payload = JSON.stringify({
-            "id": id
-        });
+        // const payload = JSON.stringify({
+        //     "id": id
+        // });
 
         const requestOptions = {
             method: 'DELETE',
             headers: myHeaders,
-            body: payload,
+            body: "",
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8080/api/accountholders", requestOptions)
+        fetch(`http://localhost:8080/api/accountholders/${id}`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log(result)

@@ -27,30 +27,31 @@ function AddAccountHolder() {
     }
 
     async function createAccountHolder() {
+
         const myHeaders = {
             "Authorization": "Bearer " + jwt,
             "Content-Type": "application/json"
         }
 
-        var payload = JSON.stringify({
+        const payload = JSON.stringify({
             "firstName": firstName,
             "middleName": middleName,
             "lastName": lastName,
-            "ssn": ssn,
-            "contact": {
-                "phone": "6665544"
-            },
-            "user": {
-                "id": userID
-            }
+            "ssn": ssn
         });
 
-        var requestOptions = {
+        const requestOptions = {
             method: 'POST',
             headers: myHeaders,
             body: payload,
             redirect: 'follow'
         };
+
+        fetch("http://localhost:8080/api/accountholders/", requestOptions)
+            .then(response => response.json())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+
 
         fetch('http://localhost:8080/api/accountholders/', requestOptions)
             .then(response => response.json())

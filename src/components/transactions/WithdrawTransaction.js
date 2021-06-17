@@ -107,7 +107,7 @@ function WithdrawTransaction() {
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm={2}> Roles</Form.Label>
+                    <Form.Label column sm={2}>Transaction type</Form.Label>
                     <select
                         name="type"
                         className="form-select"
