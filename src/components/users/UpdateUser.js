@@ -90,7 +90,7 @@ function UpdateUser() {
                     <Form.Label column sm={2}> Password</Form.Label>
                     <Col sm={10}>
                         <Form.Control
-                            type="text"
+                            type="password"
                             placeholder="Password"
                             value={password}
                             onChange={e => setPassword(e.target.value)}

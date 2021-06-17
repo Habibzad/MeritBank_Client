@@ -5,7 +5,7 @@ import { Form, Button, Col, Row, Alert } from 'react-bootstrap'
 import { BASE_URL_AUTHENTICATE } from '../../ResourceEndpoints';
 
 function AddAccountHolder() {
-    const [store] = useContext(AuthorizationContext)
+    const [store, setStore] = useContext(AuthorizationContext)
     const isLoggedIn = store.isLoggedIn;
     const role = store.role;
     const jwt = store.jwt
@@ -15,8 +15,7 @@ function AddAccountHolder() {
     const [middleName, setMiddleName] = useState('')
     const [lastName, setLastName] = useState('')
     const [ssn, setSSN] = useState('')
-
-    const [successMessage, setSuccessMessage] = useState('')
+    const [userID, setUserID] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -37,7 +36,13 @@ function AddAccountHolder() {
             "firstName": firstName,
             "middleName": middleName,
             "lastName": lastName,
-            "ssn": ssn
+            "ssn": ssn,
+            "contact": {
+                "phone": "6665544"
+            },
+            "user": {
+                "id": userID
+            }
         });
 
         var requestOptions = {
@@ -47,11 +52,11 @@ function AddAccountHolder() {
             redirect: 'follow'
         };
 
-        fetch(BASE_URL_AUTHENTICATE, requestOptions)
+        fetch('http://localhost:8080/api/accountholders/', requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log(result)
-                setSuccessMessage("Account Holder Successfully Added!")
+                setStore({ ...store, successMessage: 'Account Holder added successfully!' });
                 history.push('/admin/accountholders')
             })
             .catch(error => console.log('error', error));
@@ -106,6 +111,17 @@ function AddAccountHolder() {
                             placeholder="Social Security Number"
                             value={ssn}
                             onChange={e => setSSN(e.target.value)}
+                        />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
+                    <Form.Label column sm={2}>User ID</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            type="number"
+                            placeholder="User ID"
+                            value={userID}
+                            onChange={e => setUserID(e.target.value)}
                         />
                     </Col>
                 </Form.Group>

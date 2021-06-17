@@ -6,7 +6,7 @@ import { Table, Alert } from 'react-bootstrap'
 import { BASE_URL_AUTHENTICATE } from '../../ResourceEndpoints';
 
 function AccountHolders() {
-    const [store] = useContext(AuthorizationContext)
+    const [store, setStore] = useContext(AuthorizationContext)
     const isLoggedIn = store.isLoggedIn;
     const role = store.role;
     const jwt = store.jwt
@@ -17,15 +17,11 @@ function AccountHolders() {
         showAccountHolders()
     }, [])
 
+    if (successMessage !== '') {
+        setTimeout(() => setStore({ ...store, successMessage: '' }), 2000)
+    }
+
     const [accountHolders, setAccountHolders] = useState([])
-
-    const deleteAccountHolder = (id) => {
-        console.log(id)
-    }
-
-    const updateAccountHolder = (id) => {
-        console.log(id)
-    }
 
     async function showAccountHolders() {
         axios.get(BASE_URL_AUTHENTICATE, {
@@ -41,6 +37,39 @@ function AccountHolders() {
             })
     }
 
+    const deleteAccountHolder = (id) => {
+        console.log(id)
+        const myHeaders = {
+            "Authorization": "Bearer " + jwt,
+            "Content-Type": "application/json"
+        }
+
+        const payload = JSON.stringify({
+            "id": id
+        });
+
+        const requestOptions = {
+            method: 'DELETE',
+            headers: myHeaders,
+            body: payload,
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:8080/api/accountholders", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                console.log(result)
+                setStore({ ...store, successMessage: 'Account deleted successfully!' });
+                showAccountHolders()
+
+            })
+            .catch(error => console.log('error', error));
+    }
+
+    const updateAccountHolder = (id) => {
+        console.log(id)
+    }
+
     if (!isLoggedIn && role !== "[ROLE_ADMIN]") {
         return <Redirect to="/user" />
     }
@@ -48,7 +77,7 @@ function AccountHolders() {
     return (
         <div className="container">
             {successMessage &&
-                <Alert style={{ position: 'fixed', top: '0' }} variant='success'>{successMessage}</Alert>}
+                <Alert className="alert" variant='success'>{successMessage}</Alert>}
             <h3 className="component-header">Account Holders</h3>
             <div className="">
                 <table className="table table-striped table-bordered" style={{ backgroundColor: 'white', textAlign: 'center' }}>
@@ -60,9 +89,8 @@ function AccountHolders() {
                                 onClick={() => history.push('/admin/add-account-holder')}>
                             </i></th>
                             <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>SSN</th>
+                            <th>Name</th>
+                            <th>Profile</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,9 +108,8 @@ function AccountHolders() {
                                         </i>
                                     </td>
                                     <td>{accountHolder.id}</td>
-                                    <td>{accountHolder.firstName}</td>
-                                    <th>{accountHolder.lastName}</th>
-                                    <th>{accountHolder.ssn}</th>
+                                    <td>{accountHolder.firstName} {accountHolder.lastName}</td>
+                                    <td>Profile</td>
                                 </tr>)
                         }
                     </tbody>

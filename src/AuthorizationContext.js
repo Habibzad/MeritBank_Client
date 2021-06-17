@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 
 export const AuthorizationContext = createContext();
 
@@ -9,15 +9,16 @@ export const AuthorizationProvider = (props) => {
         role: '',
         username: '',
         isLoggedIn: false,
-        successMessage: ''
+        successMessage: '',
+        errorMessage: ''
     })
 
-    React.useEffect(() => {
-        if (localStorage.getItem('isLoggedIn') !== null) {
-            const jwt = JSON.parse(localStorage.getItem('jwt'))
-            const role = JSON.parse(localStorage.getItem('role'))
-            const username = JSON.parse(localStorage.getItem('username'))
-            const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'))
+    useEffect(() => {
+        if (sessionStorage.getItem('isLoggedIn') !== null) {
+            const jwt = JSON.parse(sessionStorage.getItem('jwt'))
+            const role = JSON.parse(sessionStorage.getItem('role'))
+            const username = JSON.parse(sessionStorage.getItem('username'))
+            const isLoggedIn = JSON.parse(sessionStorage.getItem('isLoggedIn'))
 
             setStore({
                 jwt: jwt,

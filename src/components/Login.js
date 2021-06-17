@@ -11,20 +11,22 @@ function Login() {
     const [isLoggedIn, setLoggedIn] = useState(false)
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const errorMessage = store.errorMessage
+    const history = useHistory();
 
     useEffect(() => {
         setLoggedIn(JSON.parse(localStorage.getItem('isLoggedIn')))
     }, [isLoggedIn])
 
+    if (errorMessage !== '') {
+        setTimeout(() => setStore({ ...store, errorMessage: '' }), 2000)
+    }
     //For page redirect
-    const history = useHistory();
 
     const user = {
         username: username,
         password: password
     }
-
-    const [errorMessage, setErrorMessage] = useState('')
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -64,7 +66,10 @@ function Login() {
         }).catch(err => {
             console.log(err.message)
             if (err.message === 'Request failed with status code 401') {
-                setErrorMessage("Invalid login credentials, please try again")
+                setStore({
+                    ...store,
+                    errorMessage: 'Invalid login credentials, please try again'
+                })
             }
         })
     }

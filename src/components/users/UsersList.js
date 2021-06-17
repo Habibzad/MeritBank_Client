@@ -76,7 +76,7 @@ function UsersList() {
     return (
         <div>
             {successMessage &&
-                <Alert style={{ position: 'fixed', top: '0' }} variant='success'>{successMessage}</Alert>}
+                <Alert className="alert" variant='success'>{successMessage}</Alert>}
             <h3 className="component-header">Users List</h3>
 
             <Table striped bordered hover style={{ backgroundColor: 'white', textAlign: 'center' }}>

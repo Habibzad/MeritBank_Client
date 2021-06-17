@@ -1,17 +1,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { AuthorizationProvider } from './AuthorizationContext'
-import Header from './components/shared/Header'
+
+import Header from './components/shared/Header';
+import Footer from './components/shared/Footer';
 import Login from './components/Login'
 import AccountHolders from './components/accountholders/AccountHolders'
 import Landing from './components/Landing'
-import Footer from './components/shared/Footer'
 import AdminDashboard from './components/admin_dashboard/AdminDash'
 import UserDashboard from './components/user_dashboard/UserDash'
+import NoMatch from './components/admin_dashboard/NoMatch';
 
 function App() {
     return (
         <AuthorizationProvider>
+
             <Router >
                 <Header />
                 <Switch>
@@ -30,9 +33,13 @@ function App() {
                     <Route exact path="/accountholders">
                         <AccountHolders />
                     </Route>
+                    <Route exact path="*">
+                        <NoMatch />
+                    </Route>
                 </Switch>
-                <Footer />
+                {/* <Footer /> */}
             </Router>
+
         </AuthorizationProvider>
     );
 }

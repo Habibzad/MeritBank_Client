@@ -2,7 +2,6 @@ import React from 'react';
 import '../App.css';
 import { Navbar, Container } from 'react-bootstrap'
 const Landing = () => {
-
     return (
         <div className="App">
             <Navbar className="navbar navbar-expand-lg shadow navbar-light bg-white">
@@ -67,7 +66,7 @@ const Landing = () => {
                     <div className="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
                         <div className="card card-body text-center shadow rounded-lg">
                             <p><i className="grey-text fas fa-mobile-alt fa-3x"></i></p>
-                            <h4 className="grey-text">Access</h4>
+                            <h4 className="grey-text">Mobile Banking</h4>
                             <p className="grey-text">Lorem ipsum</p>
                         </div>
                     </div>
@@ -76,7 +75,7 @@ const Landing = () => {
 
             <div className="text-center">
                 <div className="jumbotron menu1" >
-                    <h1 className="display-4">Hello, world!</h1>
+                    <h1 className="display-4">Your Bank!</h1>
                     <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
                     <hr className="my-4" />
                     <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
