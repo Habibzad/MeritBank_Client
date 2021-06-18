@@ -31,7 +31,7 @@ function PersonalChecking() {
             redirect: 'follow'
         };
 
-        fetch(`http://localhost:8080/api/accountholders/${accountNumber}/checkingAccounts`, requestOptions)
+        fetch(`http://localhost:8080/api/accountholders/${accountNumber}/personalchecking`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 setStore({ ...store, successMessage: "Account Created Successfully!" })

@@ -22,19 +22,20 @@ import UpdateAccount from '../accounts/UpdateAccount'
 import DeleteCDOffering from '../cdofferings/DeleteCDOffering'
 import ClearCDOfferings from '../cdofferings/ClearCDOfferings'
 import AddAccountHolder from '../accountholders/AddAccountHolder';
+import UpdateAccountHolder from '../accountholders/UpdateAccountHolder';
 import TransactionsList from '../transactions/TransactionsList';
 import TransferTransaction from '../transactions/TransferTransaction';
 import DepositTransaction from '../transactions/DepositTransaction';
 import WithdrawTransaction from '../transactions/WithdrawTransaction';
 import Accounts from '../accounts/Accounts';
 import AddAccount from '../accounts/AddAccount';
-import AddContactDetails from '../accountholders/AddContactDetails';
 import Profile from '../accountholders/Profile';
 import NoMatch from './NoMatch';
 import './admin.css'
 
 //Component URLs
 const addAccountHolder = '/add-account-holder'
+const updateAccountHolder = '/update-acc-holder'
 const addfferingslist = '/addfferingslist'
 const accountholders = '/accountholders'
 const accounts = '/accounts'
@@ -49,7 +50,6 @@ const transfer = '/transfer'
 const updateAccount = '/update-account'
 const usersList = '/users-list'
 const withdraw = '/withdraw'
-const contactDetails = '/contact-details'
 const profile = '/profile'
 
 
@@ -76,7 +76,6 @@ function AdminDash() {
                         <Nav.Link ><Link className="admin-main" to={url + usersList}>Users</Link></Nav.Link>
                         <Nav.Link ><Link className="admin-main" to={url + accounts}>Accounts</Link></Nav.Link>
                         <Nav.Link ><Link className="admin-main" to={url + accountholders}>AccountHolders</Link></Nav.Link>
-                        <Nav.Link ><Link className="admin-main" to={url + contactDetails}>Contact Details</Link></Nav.Link>
                         <NavDropdown title="CDOfferings">
                             <NavDropdown.Item ><Link className="dropdown_menu" to={url + addfferingslist}>CDOfferings</Link></NavDropdown.Item>
                             <NavDropdown.Item ><Link className="dropdown_menu" to={url + clearOfferings}>Clear CDOfferings</Link></NavDropdown.Item>
@@ -118,8 +117,8 @@ function AdminDash() {
                             <Route path={url + addAccountHolder}>
                                 <AddAccountHolder />
                             </Route>
-                            <Route path={url + contactDetails}>
-                                <AddContactDetails />
+                            <Route path={url + "/update-account-holder/:id"}>
+                                <UpdateAccountHolder />
                             </Route>
                             <Route path={url + profile}>
                                 <Profile />

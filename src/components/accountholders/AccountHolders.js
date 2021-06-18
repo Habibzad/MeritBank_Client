@@ -1,6 +1,6 @@
 import { AuthorizationContext } from '../../AuthorizationContext'
 import React, { useState, useEffect, useContext } from 'react'
-import { Redirect, useHistory } from 'react-router-dom'
+import { Redirect, useHistory, Link } from 'react-router-dom'
 import axios from 'axios'
 import { Table, Alert } from 'react-bootstrap'
 import { BASE_URL_AUTHENTICATE } from '../../ResourceEndpoints';
@@ -94,7 +94,7 @@ function AccountHolders() {
                             accountHolders.map(accountHolder =>
                                 <tr key={accountHolder.id}>
                                     <td>
-                                        <i className="fas fa-pencil-alt text-warning" onClick={() => updateAccountHolder(accountHolder.id)} style={{ marginRight: '30px', cursor: 'pointer' }}></i>
+                                        <Link to={`update-account-holder/${accountHolder.id}`}><i className="fas fa-pencil-alt text-warning" style={{ marginRight: '30px', cursor: 'pointer' }}></i></Link>
                                         <i className="far fa-trash-alt text-danger" style={{ cursor: 'pointer' }}
                                             onClick={() => {
                                                 if (window.confirm(`Are you sure you want to delete `)) {

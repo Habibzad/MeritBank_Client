@@ -1,10 +1,10 @@
 import { AuthorizationContext } from '../../AuthorizationContext'
-import React, { useState, useContext } from 'react'
-import { Redirect, useHistory } from 'react-router-dom'
-import { Form, Button, Col, Row, Alert } from 'react-bootstrap'
-import { BASE_URL_AUTHENTICATE } from '../../ResourceEndpoints';
+import React, { useState, useEffect, useContext } from 'react'
+import { Redirect, useHistory, useParams } from 'react-router-dom'
+import { Form, Button, Col, Row } from 'react-bootstrap'
 
-function AddAccountHolder() {
+function UpdateAccountHolder() {
+    let { id } = useParams();
     const [store, setStore] = useContext(AuthorizationContext)
     const isLoggedIn = store.isLoggedIn;
     const role = store.role;
@@ -19,22 +19,49 @@ function AddAccountHolder() {
     const [email, setEmail] = useState('')
     const [address, setAddress] = useState('')
 
+    useEffect(() => {
+        const myHeaders = {
+            "Authorization": "Bearer " + jwt,
+            "Content-Type": "application/json"
+        }
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch(`http://localhost:8080/api/accountholders/${id}`, requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                setFirstName(result.firstName)
+                setMiddleName(result.middleName)
+                setLastName(result.lastName)
+                setSSN(result.ssn)
+                setPhone(result.phone)
+                setEmail(result.email)
+                setAddress(result.address)
+                console.log(result)
+            })
+            .catch(error => console.log('error', error));
+    }, [])
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        createAccountHolder()
+        updateAccountHolder()
         setFirstName('')
         setMiddleName('')
         setLastName('')
         setSSN('')
     }
 
-    async function createAccountHolder() {
+    async function updateAccountHolder() {
         const myHeaders = {
             "Authorization": "Bearer " + jwt,
             "Content-Type": "application/json"
         }
 
-        var payload = JSON.stringify({
+        const payload = JSON.stringify({
             "firstName": firstName,
             "middleName": middleName,
             "lastName": lastName,
@@ -45,17 +72,17 @@ function AddAccountHolder() {
         });
 
         var requestOptions = {
-            method: 'POST',
+            method: 'PUT',
             headers: myHeaders,
             body: payload,
             redirect: 'follow'
         };
 
-        fetch('http://localhost:8080/api/accountholders/', requestOptions)
+        fetch(`http://localhost:8080/api/accountholders/${id}`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log(result)
-                setStore({ ...store, successMessage: 'Account Holder added successfully!' });
+                setStore({ ...store, successMessage: 'Account Holder updated successfully!' });
                 history.push('/admin/accountholders')
             })
             .catch(error => console.log('error', error));
@@ -67,8 +94,19 @@ function AddAccountHolder() {
 
     return (
         <div>
-            <h3 className="component-header">Create Account Holder</h3>
+            <h3 className="component-header">Update Account Holder</h3>
             <Form onSubmit={handleSubmit}>
+                <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+                    <Form.Label column sm={2}>Id</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            type="text"
+                            placeholder="First Name"
+                            value={id}
+                            readOnly
+                        />
+                    </Col>
+                </Form.Group>
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                     <Form.Label column sm={2}>First Name</Form.Label>
                     <Col sm={10}>
@@ -157,4 +195,4 @@ function AddAccountHolder() {
     )
 }
 
-export default AddAccountHolder
+export default UpdateAccountHolder

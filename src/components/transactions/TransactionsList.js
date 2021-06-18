@@ -31,7 +31,10 @@ function TransactionsList() {
 
         fetch("http://localhost:8080/api/transactions", requestOptions)
             .then(response => response.json())
-            .then(result => setTransactions(result))
+            .then(result => {
+                console.log(result)
+                setTransactions(result)
+            })
             .catch(error => console.log('error', error));
     }
 
