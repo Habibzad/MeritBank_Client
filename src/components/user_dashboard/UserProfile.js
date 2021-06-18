@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Card } from 'react-bootstrap'
 function UserProfile() {
     const [values, setValues] = useState({
-        id: '',
-        phone: '',
-        email: '',
-        address: ''
+        id: '1',
+        phone: '2131312',
+        email: 'a@3sx.com',
+        address: 'j streeet London'
     })
 
     useEffect(() => {
@@ -26,7 +26,7 @@ function UserProfile() {
             .then(response => response.json())
             .then(result => {
                 console.log(result)
-                setValues(result.accountHoldersContactDetails)
+                // setValues(result.accountHoldersContactDetails)
             })
             .catch(error => console.log('error', error));
     }

@@ -29,7 +29,10 @@ function Accounts() {
 
         fetch("http://localhost:8080/api/all-accounts", requestOptions)
             .then(response => response.json())
-            .then(result => setAccounts(result))
+            .then(result => {
+                setAccounts(result)
+                console.log('accounts results', result)
+            })
             .catch(error => console.log('error', error));
     }
 
@@ -63,6 +66,8 @@ function Accounts() {
                             <th>Balance</th>
                             <th>Interest Rate</th>
                             <th>Opening Date</th>
+                            <th>Account Type</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody >
@@ -82,7 +87,9 @@ function Accounts() {
                                     <td>{account.accountNumber}</td>
                                     <td>{account.balance}</td>
                                     <td>{account.interestRate}</td>
-                                    <th>{account.openingDate}</th>
+                                    <td>{account.openingDate}</td>
+                                    <td>{account.accountType}</td>
+                                    <td>{account.status}</td>
                                 </tr>)
                         }
                     </tbody>

@@ -1,6 +1,6 @@
 import { AuthorizationContext } from '../../AuthorizationContext'
 import React, { useState, useEffect, useContext } from 'react'
-import { Redirect, useHistory } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { USERS } from '../../ResourceEndpoints';
 import { Table, Alert } from 'react-bootstrap'
 
@@ -9,18 +9,17 @@ function UsersList() {
     const isLoggedIn = store.isLoggedIn;
     const role = store.role;
     const jwt = store.jwt
-    const history = useHistory();
     const successMessage = store.successMessage;
+    const [users, setUsers] = useState([])
 
-    if (successMessage !== '') {
-        setTimeout(() => setStore({ ...store, successMessage: '' }), 2000)
-    }
+
+    //Display users when component is mountedF
     useEffect(() => {
         displayUsers();
     }, [])
 
-    const [users, setUsers] = useState([])
 
+    //Display users
     const displayUsers = async () => {
         const myHeaders = {
             "Authorization": "Bearer " + jwt,
@@ -38,25 +37,18 @@ function UsersList() {
             .catch(error => console.log('error', error));
     }
 
+    //Delete User
     async function deleteUser(id) {
-
-        console.log(id)
         const myHeaders = {
             "Authorization": "Bearer " + jwt,
             "Content-Type": "application/json"
         }
-
-        const payload = JSON.stringify({
-            "id": id
-        });
-
         const requestOptions = {
             method: 'DELETE',
-            headers: myHeaders,
-            body: payload
+            headers: myHeaders
         };
 
-        fetch(USERS, requestOptions)
+        fetch(`http://localhost:8080/api/users/${id}`, requestOptions)
             .then(response => {
                 displayUsers();
                 setStore({ ...store, successMessage: 'User deleted successfully!' })
@@ -64,13 +56,12 @@ function UsersList() {
             .catch(error => console.log('error', error));
     }
 
-    const updateUser = (id) => {
-        console.log('id from edit: ', id)
-        history.push('udate-user')
-    }
-
     if (!isLoggedIn && role !== "[ROLE_ADMIN]") {
         return <Redirect to="/user" />
+    }
+
+    if (successMessage !== '') {
+        setTimeout(() => setStore({ ...store, successMessage: '' }), 2000)
     }
 
     return (
@@ -83,11 +74,7 @@ function UsersList() {
                 <thead>
                     <tr>
                         <th>
-                            <i
-                                className="fas fa-plus text-primary"
-                                style={{ cursor: 'pointer' }}
-                                onClick={() => history.push('/admin/create-user')}>
-                            </i>
+                            <Link to={`create-user`}><i className="fas fa-plus text-primary" style={{ cursor: 'pointer' }}></i></Link>
                         </th>
                         <th>ID</th>
                         <th>Username</th>
@@ -101,7 +88,7 @@ function UsersList() {
                         users.map(user =>
                             <tr key={user.id}>
                                 <td>
-                                    <i className="fas fa-pencil-alt text-warning" onClick={() => updateUser(user.id)} style={{ marginRight: '30px', cursor: 'pointer' }}></i>
+                                    <Link to={`udate-user/${user.id}`}><i className="fas fa-pencil-alt text-warning" style={{ marginRight: '30px', cursor: 'pointer' }}></i></Link>
                                     <i className="fas fa-user-slash text-danger" style={{ cursor: 'pointer' }}
                                         onClick={() => {
                                             if (window.confirm(`Are you sure you want to delete ${user.userName}`)) {

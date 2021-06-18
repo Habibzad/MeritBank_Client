@@ -15,7 +15,6 @@ function AddAccountHolder() {
     const [middleName, setMiddleName] = useState('')
     const [lastName, setLastName] = useState('')
     const [ssn, setSSN] = useState('')
-    const [userID, setUserID] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -36,13 +35,7 @@ function AddAccountHolder() {
             "firstName": firstName,
             "middleName": middleName,
             "lastName": lastName,
-            "ssn": ssn,
-            "contact": {
-                "phone": "6665544"
-            },
-            "user": {
-                "id": userID
-            }
+            "ssn": ssn
         });
 
         var requestOptions = {
@@ -111,17 +104,6 @@ function AddAccountHolder() {
                             placeholder="Social Security Number"
                             value={ssn}
                             onChange={e => setSSN(e.target.value)}
-                        />
-                    </Col>
-                </Form.Group>
-                <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
-                    <Form.Label column sm={2}>User ID</Form.Label>
-                    <Col sm={10}>
-                        <Form.Control
-                            type="number"
-                            placeholder="User ID"
-                            value={userID}
-                            onChange={e => setUserID(e.target.value)}
                         />
                     </Col>
                 </Form.Group>

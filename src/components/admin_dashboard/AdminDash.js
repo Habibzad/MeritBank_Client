@@ -11,15 +11,12 @@ import {
 } from "react-router-dom";
 
 //Components
-import Header from '../shared/Header';
-import Footer from '../../components/shared/Footer'
 import AdminHome from './AdminHome'
 import CDOfferings from '../cdofferings/CDOfferingList'
 import AddCDOffering from '../cdofferings/AddCDOffering'
 import AccountHolders from '../accountholders/AccountHolders'
 import UsersList from '../users/UsersList'
 import CreateUser from '../users/CreateUser'
-import DeleteUser from '../users/DeleteUser'
 import UpdateUser from '../users/UpdateUser';
 import UpdateAccount from '../accounts/UpdateAccount'
 import DeleteCDOffering from '../cdofferings/DeleteCDOffering'
@@ -45,13 +42,11 @@ const addcdofferings = '/addcdofferomg'
 const addAccount = '/add-account'
 const clearOfferings = '/clear-offerings'
 const createUser = '/create-user'
-const deleteUser = '/delete-user'
 const deleteCDOffering = '/delete-cdoffering'
 const deposit = '/deposit'
 const transactions = '/transactions'
 const transfer = '/transfer'
 const updateAccount = '/update-account'
-const updateUser = '/udate-user'
 const usersList = '/users-list'
 const withdraw = '/withdraw'
 const contactDetails = '/contact-details'
@@ -77,7 +72,7 @@ function AdminDash() {
                 </div>
                 <Router className="">
                     <Nav bg="light" variant="primary" className="menu">
-                        <Nav.Link ><Link className="admin-main" to={url}>Home</Link></Nav.Link>
+                        <Nav.Link ><Link className="admin-main" active to={url}>Home</Link></Nav.Link>
                         <Nav.Link ><Link className="admin-main" to={url + usersList}>Users</Link></Nav.Link>
                         <Nav.Link ><Link className="admin-main" to={url + accounts}>Accounts</Link></Nav.Link>
                         <Nav.Link ><Link className="admin-main" to={url + accountholders}>AccountHolders</Link></Nav.Link>
@@ -104,12 +99,10 @@ function AdminDash() {
                             <Route exact path={url + createUser}>
                                 <CreateUser />
                             </Route>
-                            <Route exact path={url + deleteUser}>
-                                <DeleteUser />
-                            </Route>
-                            <Route exact path={url + updateUser}>
+                            <Route exact path={url + '/udate-user/:id'}>
                                 <UpdateUser />
                             </Route>
+
                             <Route exact path={url + accounts}>
                                 <Accounts />
                             </Route>

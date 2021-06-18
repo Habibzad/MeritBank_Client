@@ -18,6 +18,7 @@ function Login() {
         setLoggedIn(JSON.parse(localStorage.getItem('isLoggedIn')))
     }, [isLoggedIn])
 
+    //Error message disappear after 2 seconds
     if (errorMessage !== '') {
         setTimeout(() => setStore({ ...store, errorMessage: '' }), 2000)
     }
@@ -42,7 +43,7 @@ function Login() {
             const decodedjwt = jwt_decode(res.data.jwt);
             const username = decodedjwt.sub;
             console.log(decodedjwt)
-
+            console.log(res.data)
             localStorage.setItem('jwt', JSON.stringify(jwt))
             localStorage.setItem('role', JSON.stringify(role))
             localStorage.setItem('isLoggedIn', JSON.stringify(isLoggedIn))
@@ -64,8 +65,8 @@ function Login() {
                 }
             }
         }).catch(err => {
-            console.log(err.message)
-            if (err.message === 'Request failed with status code 401') {
+            console.log('error message', err.message)
+            if (err.message !== null) {
                 setStore({
                     ...store,
                     errorMessage: 'Invalid login credentials, please try again'

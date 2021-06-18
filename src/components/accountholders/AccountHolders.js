@@ -31,6 +31,7 @@ function AccountHolders() {
         })
             .then((res) => {
                 setAccountHolders(res.data)
+                console.log(res.data)
             })
             .catch((error) => {
                 console.error(error)
@@ -38,24 +39,19 @@ function AccountHolders() {
     }
 
     const deleteAccountHolder = (id) => {
-        console.log(id)
+
         const myHeaders = {
             "Authorization": "Bearer " + jwt,
             "Content-Type": "application/json"
         }
-
-        const payload = JSON.stringify({
-            "id": id
-        });
-
-        const requestOptions = {
+        var requestOptions = {
             method: 'DELETE',
             headers: myHeaders,
-            body: payload,
+            body: "",
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8080/api/accountholders", requestOptions)
+        fetch(`http://localhost:8080/api/accountholders/${id}`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log(result)

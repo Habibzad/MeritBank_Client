@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { Form, Button, Col, Row } from 'react-bootstrap'
 
 
-function CreateCDAccount() {
+function CDAccount() {
     const [balance, setBalance] = useState('')
     const [accountNumber, setAccountNumber] = useState('')
     const [cdOfferingID, setCDOfferingID] = useState('')
@@ -45,7 +45,7 @@ function CreateCDAccount() {
     }
     return (
         <div style={{ padding: '20px 10px', border: '1px solid rgba(0,0,0,0.2)', backgroundColor: '#f8f8f8' }}>
-            <h4 style={{ marginBottom: '30px' }}>Add Savings Account</h4>
+            <h4 style={{ marginBottom: '30px' }}>Add Certificate of Deposit Account</h4>
             <Form onSubmit={handleSubmit}>
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                     <Form.Label column sm={2}>Account Holders ID</Form.Label>
@@ -92,4 +92,4 @@ function CreateCDAccount() {
     )
 }
 
-export default CreateCDAccount
+export default CDAccount

@@ -1,8 +1,7 @@
 import { AuthorizationContext } from '../../AuthorizationContext'
 import React, { useState, useContext } from 'react'
 import { Redirect, useHistory } from 'react-router-dom'
-import { Form, Button, Col, Row, Alert } from 'react-bootstrap'
-import { CREATE_USER } from '../../ResourceEndpoints';
+import { Form, Button, Col, Row } from 'react-bootstrap'
 
 function CreateUser() {
     const [store, setStore] = useContext(AuthorizationContext)
@@ -46,7 +45,7 @@ function CreateUser() {
             redirect: 'follow'
         };
 
-        fetch(CREATE_USER, requestOptions)
+        fetch('http://localhost:8080/api/createuser', requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log(result)

@@ -211,3 +211,7 @@ body{
 .create-account-tab{
   color: blue
 }
+
+.add-account-dash{
+  display: flex;
+}

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { Form, Button, Col, Row } from 'react-bootstrap'
 
 
-function CreateSavingsAccount() {
+function SavingsAccount() {
     const [balance, setBalance] = useState('')
     const [accountNumber, setAccountNumber] = useState('')
 
@@ -78,4 +78,4 @@ function CreateSavingsAccount() {
     )
 }
 
-export default CreateSavingsAccount
+export default SavingsAccount
