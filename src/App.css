@@ -1,12 +1,37 @@
-body{
-  background-color: #ececec;
+:root {
+  /* Background Color */
+--bg-primary: #C84B31;
+--bg-secondary: #3A6351;
+--bg-light: #EEEBDD;
+
+/* Font Color */
+--fc-light: #eeeeee;
+--fc-dark: #4d4d4d;
+--accent: #fcce02;
 }
 
+
+body{
+  background-color: var(--bg-light)
+}
+
+.logout-btn{
+  font-weight: 700;
+  color: blue;
+}
+
+.logout-btn:hover{
+  cursor: pointer;
+  color: blue;
+;}
 
 .fab{
   color: #343A40;
 }
 
+.user-dash{
+  /* margin-top: 50px; */
+}
 .fab:hover{
   color: #5186A8;
   cursor: pointer;
@@ -15,11 +40,11 @@ body{
 .b13{
   width: 100%; 
   height: 360px !important;
-  background: linear-gradient(25deg,rgba(23,162,184),rgba(250, 246, 3, 0.3))
+  /* background: linear-gradient(25deg,rgb(206, 18, 18),rgba(240, 84, 84, 0.3)) */
 }
 
 .b12{
-  background: url('https://ccecosystems.news/wp-content/uploads/2020/10/OpenBankingProject-900x418.jpg') top center / cover no-repeat;
+  background: url('https://www.pinsentmasons.com/-/media/images/special-reports/openbanking-1440x700.jpg?h=583&la=en-gb&w=1200&hash=90BA1A8132AB74B2316FA934A39E1097') top center / cover no-repeat;
 }
 
 .b14{
@@ -120,20 +145,24 @@ body{
 
 .login-btn:hover{
   text-decoration: none;
-  color: #5086A8
+  color: var(--accent)
 }
 
 #d3{
   border: none;
 }
 .menu{
-  flex: 1;
-  /* height: 50px; */
-  background-color: #343A40
+  background-color: #ec674c;
+  padding: 0 47px;
+}
+
+.admin-header{
+  height: 100px;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid #ffffff;
 }
 
 .menu-link{
-  /* padding: 10px; */
   color: #ffffff;
   border-bottom: 5px solid #343A40;
   /* line-height: 34px; */
@@ -145,37 +174,48 @@ body{
   border-bottom: 5px solid #ffffff;
 }
 
-.admin-main{
-  padding: 5px;
+.dash-menu{
+  text-align: center;
+  font-size: 17px;
+  color: #ffffff;
+  width: 130px;
+  border: 1px solid #ffffff;
+  border-bottom: 5px solid var(--bg-primary);
+  border-top: none;
+  height: 100%;
+  line-height: 40px;
+}
+
+.nav-link{
+  border: 1px solid #ffffff;
+  border-top: none;
+  border-bottom: 5px solid var(--bg-primary);
+  height: 100%;
+  width: 130px;
   color: #ffffff;
 }
 
-.admin-main:hover{
+.dash-menu:hover,
+.nav-link:hover{
   text-decoration: none;
-  color: #00b7ff;
+  border-bottom: 5px solid var(--accent);
+  color: var(--accent);
 }
+
+
+
+.admin-top-header{
+  padding: 0;
+  background-color: #ffffff;
+}
+
 .dash-header{
   background-color: #ffffff;
   /* padding: 30px 0; */
 }
 
-.nav-link{
-  /* border: 1px solid #ffffff; */
-  /* border-radius: 5px; */
-  color: #ffffff;
-}
-
-.nav-link:hover{
-  color: #00b7ff;
-}
-
-.dropdown_menu{
-  color: #343A40;
-}
-
-.dropdown_menu:hover{
-  color: #343A40;
-  text-decoration: none;
+.nav-bar{
+  padding: 0;
 }
 
 .waves-effect{
@@ -197,8 +237,8 @@ body{
 }
 
 .menu1{
+  height: 90vh;
   background-color: #ffffff;
-  margin-bottom: 100px;
 }
 
 .form-select{
@@ -214,4 +254,29 @@ body{
 
 .add-account-dash{
   display: flex;
+}
+
+.header,
+.page-footer{
+  background-color: var(--bg-primary)
+}
+
+.landing-text{
+  color: var(--bg-primary);
+}
+
+.landing-fa{
+  color: #1B1717;
+}
+
+.landing-jumbo{
+  background-color: #ffffff;
+}
+
+.footer-link{
+  color: var(--accent);
+}
+
+.footer-link:hover{
+  color: #ffffff;
 }

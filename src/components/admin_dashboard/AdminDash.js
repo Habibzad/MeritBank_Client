@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { AuthorizationContext } from '../../AuthorizationContext'
-import { Nav, Jumbotron, NavDropdown } from 'react-bootstrap'
+import { Form, FormControl, Button, Jumbotron, Navbar, NavDropdown } from 'react-bootstrap'
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -35,7 +36,6 @@ import './admin.css'
 
 //Component URLs
 const addAccountHolder = '/add-account-holder'
-const updateAccountHolder = '/update-acc-holder'
 const addfferingslist = '/addfferingslist'
 const accountholders = '/accountholders'
 const accounts = '/accounts'
@@ -50,11 +50,11 @@ const transfer = '/transfer'
 const updateAccount = '/update-account'
 const usersList = '/users-list'
 const withdraw = '/withdraw'
-const profile = '/profile'
+const profile = '/profile/:id'
 
 
 function AdminDash() {
-    const [store] = useContext(AuthorizationContext)
+    const [store, setStore] = useContext(AuthorizationContext)
     const isLoggedIn = store.isLoggedIn;
     const role = store.role;
     const user = store.username
@@ -64,97 +64,129 @@ function AdminDash() {
         return <Redirect to="/" />
     }
 
+    const logout = () => {
+        setStore({
+            jwt: '',
+            role: '',
+            username: '',
+            isLoggedIn: false
+        })
+        sessionStorage.clear()
+    }
+
     return (
-        <div className="">
-            <div className="container">
-                <div className="dash-header">
-                    <h4 style={{ color: '#5086A8', margin: '0', lineHeight: '60px', paddingLeft: '5px' }}>Hello, {user}</h4>
-                </div>
-                <Router className="">
-                    <Nav bg="light" variant="primary" className="menu">
-                        <Nav.Link ><Link className="admin-main" active to={url}>Home</Link></Nav.Link>
-                        <Nav.Link ><Link className="admin-main" to={url + usersList}>Users</Link></Nav.Link>
-                        <Nav.Link ><Link className="admin-main" to={url + accounts}>Accounts</Link></Nav.Link>
-                        <Nav.Link ><Link className="admin-main" to={url + accountholders}>AccountHolders</Link></Nav.Link>
-                        <NavDropdown title="CDOfferings">
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + addfferingslist}>CDOfferings</Link></NavDropdown.Item>
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + clearOfferings}>Clear CDOfferings</Link></NavDropdown.Item>
-                        </NavDropdown>
-                        <NavDropdown title="Transactions">
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + transactions}>All Transactions</Link></NavDropdown.Item>
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + transfer}>Transfer</Link></NavDropdown.Item>
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + deposit}>Deposit</Link></NavDropdown.Item>
-                            <NavDropdown.Item ><Link className="dropdown_menu" to={url + withdraw}>Withdraw</Link></NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                    <Jumbotron className="menu1">
-                        <Switch>
-                            <Route exact path={url}>
-                                <AdminHome />
-                            </Route>
-                            <Route exact path={url + usersList}>
-                                <UsersList />
-                            </Route>
-                            <Route exact path={url + createUser}>
-                                <CreateUser />
-                            </Route>
-                            <Route exact path={url + '/udate-user/:id'}>
-                                <UpdateUser />
-                            </Route>
+        <div className="container dash">
+            <Router>
+                <Navbar bg="" variant="" className="admin-top-header">
+                    <Navbar.Collapse className="justify-content-end">
+                        {
+                            isLoggedIn
+                                ?
+                                <code onClick={logout} className="logout-btn">
+                                    Logout
+                                </code>
+                                :
+                                null
+                        }
+                    </Navbar.Collapse>
+                </Navbar>
+                <Navbar bg="" variant="" className="admin-header">
+                    <img src="/images/logo.jpeg" height="35" alt="logo" />
+                    <Navbar.Collapse className="justify-content-end">
+                        <Form className="d-flex">
+                            <FormControl
+                                type="search"
+                                placeholder="How can we help you?"
+                                className="mr-2"
+                                aria-label="Search"
+                            />
+                            <Button variant="warning"><i class="fas fa-search"></i></Button>
+                        </Form>
+                    </Navbar.Collapse>
+                </Navbar>
+                <Navbar bg="" variant="" className="menu">
+                    <Link className="dash-menu" active to={url}>Home</Link>
+                    <Link className="dash-menu" to={url + usersList}>Users</Link>
+                    <Link className="dash-menu" to={url + accounts}>Accounts</Link>
+                    <Link className="dash-menu" to={url + accountholders}>AccountHolders</Link>
+                    <NavDropdown title="CDOfferings">
+                        <NavDropdown.Item ><Link to={url + addfferingslist}>CDOfferings</Link></NavDropdown.Item>
+                        <NavDropdown.Item ><Link className="dropdown_menu" to={url + clearOfferings}>Clear CDOfferings</Link></NavDropdown.Item>
+                    </NavDropdown>
+                    <NavDropdown title="Transactions" className="d-flex">
+                        <NavDropdown.Item ><Link className="dropdown_menu" to={url + transactions}>All Transactions</Link></NavDropdown.Item>
+                        <NavDropdown.Item ><Link className="dropdown_menu" to={url + transfer}>Transfer</Link></NavDropdown.Item>
+                        <NavDropdown.Item ><Link className="dropdown_menu" to={url + deposit}>Deposit</Link></NavDropdown.Item>
+                        <NavDropdown.Item ><Link className="dropdown_menu" to={url + withdraw}>Withdraw</Link></NavDropdown.Item>
+                    </NavDropdown>
+                </Navbar>
+                <Jumbotron className="menu1">
+                    <Switch>
+                        <Route exact path={url}>
+                            <AdminHome />
+                        </Route>
+                        <Route exact path={url + usersList}>
+                            <UsersList />
+                        </Route>
+                        <Route exact path={url + createUser}>
+                            <CreateUser />
+                        </Route>
+                        <Route exact path={url + '/udate-user/:id'}>
+                            <UpdateUser />
+                        </Route>
 
-                            <Route exact path={url + accounts}>
-                                <Accounts />
-                            </Route>
-                            <Route exact path={url + addAccount}>
-                                <AddAccount />
-                            </Route>
-                            <Route exact path={url + updateAccount}>
-                                <UpdateAccount />
-                            </Route>
-                            <Route exact path={url + accountholders}>
-                                <AccountHolders />
-                            </Route>
-                            <Route path={url + addAccountHolder}>
-                                <AddAccountHolder />
-                            </Route>
-                            <Route path={url + "/update-account-holder/:id"}>
-                                <UpdateAccountHolder />
-                            </Route>
-                            <Route path={url + profile}>
-                                <Profile />
-                            </Route>
-                            <Route path={url + addfferingslist}>
-                                <CDOfferings />
-                            </Route>
-                            <Route path={url + addcdofferings}>
-                                <AddCDOffering />
-                            </Route>
-                            <Route path={url + deleteCDOffering}>
-                                <DeleteCDOffering />
-                            </Route>
-                            <Route path={url + clearOfferings}>
-                                <ClearCDOfferings />
-                            </Route>
-                            <Route path={url + transactions}>
-                                <TransactionsList />
-                            </Route>
-                            <Route path={url + transfer}>
-                                <TransferTransaction />
-                            </Route>
-                            <Route path={url + deposit}>
-                                <DepositTransaction />
-                            </Route>
-                            <Route path={url + withdraw}>
-                                <WithdrawTransaction />
-                            </Route>
-                            <Route path={url + withdraw}>
-                                <NoMatch />
-                            </Route>
-                        </Switch>
+                        <Route exact path={url + accounts}>
+                            <Accounts />
+                        </Route>
+                        <Route exact path={url + addAccount}>
+                            <AddAccount />
+                        </Route>
+                        <Route exact path={url + updateAccount}>
+                            <UpdateAccount />
+                        </Route>
+                        <Route exact path={url + accountholders}>
+                            <AccountHolders />
+                        </Route>
+                        <Route path={url + addAccountHolder}>
+                            <AddAccountHolder />
+                        </Route>
+                        <Route path={url + "/update-account-holder/:id"}>
+                            <UpdateAccountHolder />
+                        </Route>
+                        <Route path={url + profile}>
+                            <Profile />
+                        </Route>
+                        <Route path={url + addfferingslist}>
+                            <CDOfferings />
+                        </Route>
+                        <Route path={url + addcdofferings}>
+                            <AddCDOffering />
+                        </Route>
+                        <Route path={url + deleteCDOffering}>
+                            <DeleteCDOffering />
+                        </Route>
+                        <Route path={url + clearOfferings}>
+                            <ClearCDOfferings />
+                        </Route>
+                        <Route path={url + transactions}>
+                            <TransactionsList />
+                        </Route>
+                        <Route path={url + transfer}>
+                            <TransferTransaction />
+                        </Route>
+                        <Route path={url + deposit}>
+                            <DepositTransaction />
+                        </Route>
+                        <Route path={url + withdraw}>
+                            <WithdrawTransaction />
+                        </Route>
+                        <Route path={url + withdraw}>
+                            <NoMatch />
+                        </Route>
+                    </Switch>
 
-                    </Jumbotron>
-                </Router>
-            </div>
+                </Jumbotron>
+            </Router>
         </div>
     )
 }

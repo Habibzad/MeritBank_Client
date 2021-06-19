@@ -16,24 +16,22 @@ function Header() {
             username: '',
             isLoggedIn: false
         })
-        localStorage.clear()
+        sessionStorage.clear()
     }
 
-    const loggedInUser = `Welcome, ${user}`
+    const loggedInUser = `${user}`
     return (
-        <div className="">
-            <Navbar bg="dark" className="justify-content-end">
-                {
-                    isLoggedIn
-                        ?
-                        <NavDropdown title={loggedInUser}>
-                            <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
-                        </NavDropdown>
-                        :
-                        <Link className="login-btn" to="/login"><i className="fas fa-user"></i> Login</Link>
-                }
-            </Navbar>
-        </div>
+        <Navbar bg="" className="header justify-content-end">
+            {
+                isLoggedIn
+                    ?
+                    <NavDropdown title={loggedInUser}>
+                        <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+                    </NavDropdown>
+                    :
+                    <Link className="login-btn" to="/login"><i className="fas fa-user"></i> Login</Link>
+            }
+        </Navbar>
     );
 }
 

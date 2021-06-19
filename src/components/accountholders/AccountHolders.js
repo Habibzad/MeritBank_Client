@@ -105,7 +105,7 @@ function AccountHolders() {
                                     </td>
                                     <td>{accountHolder.id}</td>
                                     <td>{accountHolder.firstName} {accountHolder.lastName}</td>
-                                    <td>Profile</td>
+                                    <td><Link to={`profile/${accountHolder.id}`}>Profile</Link></td>
                                 </tr>)
                         }
                     </tbody>

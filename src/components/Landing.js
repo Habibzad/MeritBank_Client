@@ -1,9 +1,12 @@
 import React from 'react';
 import '../App.css';
 import { Navbar, Container } from 'react-bootstrap'
+import Header from './shared/Header';
+import Footer from './shared/Footer'
 const Landing = () => {
     return (
         <div className="App">
+            <Header />
             <Navbar className="navbar navbar-expand-lg shadow navbar-light bg-white">
                 <Container>
                     <img src="/images/logo.png" height="35" alt="logo" />
@@ -36,51 +39,51 @@ const Landing = () => {
             </div>
             <div className="container b14" >
                 <div className="d-flex flex-column text-white py-3 align-items-center">
-                    <h3 className="h5 text-center">Stay in control of <br />your finances any time.</h3>
-                    <h1 className="font-weight-bold text-center pb-3">Open The Account's You Need</h1>
+                    <h1 className="font-weight-bold text-center pb-3">.</h1>
+                    <h1 className="font-weight-bold text-center pb-3">.</h1>
                 </div>
             </div>
             <div className="container">
                 <div className="row py-4">
                     <div className="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
                         <div className="card card-body text-center shadow rounded-lg">
-                            <p><i className="grey-text fab fa-cc-visa fa-3x"></i></p>
-                            <h4 className="grey-text">Credit Cards</h4>
-                            <p className="grey-text">Lorem ipsum</p>
+                            <p><i className="landing-fa fab fa-cc-visa fa-3x"></i></p>
+                            <h4 className="landing-text">Credit Cards</h4>
+                            <p className="landing-text">Lorem ipsum</p>
                         </div>
                     </div>
                     <div className="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
                         <div className="card card-body text-center shadow rounded-lg">
-                            <p><i className="grey-text fas fa-dollar-sign fa-3x"></i></p>
-                            <h4 className="grey-text">Competative Interest Rates</h4>
+                            <p><i className="landing-fa fas fa-dollar-sign fa-3x"></i></p>
+                            <h4 className="landing-text">Competative Interest Rates</h4>
                             <i className=""></i>
                         </div>
                     </div>
                     <div className="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
                         <div className="card card-body text-center shadow rounded-lg">
-                            <p><i className="grey-text fas fa-tachometer-alt fa-3x"></i></p>
-                            <h4 className="grey-text">Free Credit Score</h4>
-                            <p className="grey-text">Lorem ipsum</p>
+                            <p><i className="landing-fa fas fa-tachometer-alt fa-3x"></i></p>
+                            <h4 className="landing-text">Free Credit Score</h4>
+                            <p className="landing-text">Lorem ipsum</p>
                         </div>
                     </div>
                     <div className="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
                         <div className="card card-body text-center shadow rounded-lg">
-                            <p><i className="grey-text fas fa-mobile-alt fa-3x"></i></p>
-                            <h4 className="grey-text">Mobile Banking</h4>
-                            <p className="grey-text">Lorem ipsum</p>
+                            <p><i className="landing-fa fas fa-mobile-alt fa-3x"></i></p>
+                            <h4 className="landing-text">Mobile Banking</h4>
+                            <p className="landing-text">Lorem ipsum</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div className="text-center">
-                <div className="jumbotron menu1" >
-                    <h1 className="display-4">Your Bank!</h1>
-                    <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                    <hr className="my-4" />
-                    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                <div className="jumbotron landing-jumbo" >
+                    <h1 className="font-weight-bold text-center pb-3">Open The Account's You Need</h1>
+                    <h3 className="h5 text-center">Stay in control of <br />your finances any time.</h3>
+
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }

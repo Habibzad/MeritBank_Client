@@ -3,8 +3,6 @@ import { Card } from 'react-bootstrap'
 function AdminHome() {
     return (
         <React.Fragment>
-
-            <h3 className="component-header">Admin Dashboard</h3>
             <Card className="text-center">
                 <Card.Body>
                     <Card.Title>Welcome to Admin Dashboard</Card.Title>

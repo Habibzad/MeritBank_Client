@@ -105,11 +105,6 @@ function CreateUser() {
                         <option value="ROLE_ADMIN">Admin</option>
                     </select>
                 </Form.Group>
-                {/* <Form.Group>
-                    <Form.Label column sm={2}> Active</Form.Label>
-                    <input type="radio" value="Male" name="gender" /> Active
-                    <input type="radio" value="Female" name="gender" /> Inactive
-                </Form.Group> */}
                 <Form.Group as={Row} className="mb-3">
                     <Col sm={{ span: 10, offset: 2 }}>
                         <Button variant="dark" type="submit">Submit</Button>
