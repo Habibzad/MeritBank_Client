@@ -43,8 +43,8 @@ function TransactionsList() {
         <div className="container">
             {successMessage &&
                 <Alert style={{ position: 'fixed', top: '0' }} variant='success'>{successMessage}</Alert>}
-            <h3 className="component-header">Transactions</h3>
-            <div className="">
+            <h3 className="transfer-header"><i class="fas fa-chevron-circle-right"></i>  Transactions</h3>
+            <div >
                 <table style={{ backgroundColor: 'white', textAlign: 'center' }} className="table table-striped table-bordered">
                     <thead>
                         <tr>

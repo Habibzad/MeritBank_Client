@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import { Card } from 'react-bootstrap'
+import React, { useState, useEffect, useContext } from 'react'
+import { AuthorizationContext } from '../../AuthorizationContext'
+import { CardDeck, Card, Button, Table } from 'react-bootstrap'
+
+
 function UserProfile() {
-    const [values, setValues] = useState({
-        id: '1',
-        phone: '2131312',
-        email: 'a@3sx.com',
-        address: 'j streeet London'
-    })
+    const [store] = useContext(AuthorizationContext)
+    const jwt = store.jwt
+    const [user, setUser] = useState({})
 
     useEffect(() => {
         displayContactInfo()
     }, [])
 
     const displayContactInfo = () => {
-        var myHeaders = new Headers();
-        myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2huIiwiZXhwIjoxNjIzODA3ODM0LCJpYXQiOjE2MjM3NzE4MzR9.MgUxxEdjG1WNkqcMgfx0Zf6r_d_jAHYZBV_7pJS2aRA");
-
-        var requestOptions = {
+        const myHeaders = {
+            "Authorization": `Bearer ${jwt}`,
+            "Content-Type": "application/json"
+        }
+        const requestOptions = {
             method: 'GET',
             headers: myHeaders,
             redirect: 'follow'
@@ -26,24 +27,88 @@ function UserProfile() {
             .then(response => response.json())
             .then(result => {
                 console.log(result)
-                // setValues(result.accountHoldersContactDetails)
+                setUser(result)
             })
             .catch(error => console.log('error', error));
     }
 
     return (
         <div>
-            <Card >
-                <Card.Body>
-                    <Card.Subtitle className="mb-2 text-muted">Contact Details</Card.Subtitle>
-                    <br />
-                    <Card.Subtitle className="mb-2 text-muted">Phone No: <code style={{ color: 'grey' }}>{values.phone}</code></Card.Subtitle>
-                    <Card.Subtitle className="mb-2 text-muted">Email: <code style={{ color: 'grey' }}>{values.email}</code> </Card.Subtitle>
-                    <Card.Subtitle className="mb-2 text-muted">Home Address: <code style={{ color: 'grey' }}>{values.address}</code></Card.Subtitle>
-                    <Card.Link style={{ cursor: 'pointer' }}>Update Contact Info</Card.Link>
-                    <Card.Link style={{ cursor: 'pointer' }}>Change password</Card.Link>
-                </Card.Body>
-            </Card>
+            <h3 className="component-header">User Dashboard</h3>
+            <p style={{ color: 'blue', padding: '50px 0 0 50px' }}>Welcome, {user.firstName} {user.lastName}!</p>
+            <CardDeck className="wrapper">
+                <Card>
+                    <Card.Body>
+                        <Card.Title style={{ padding: '10px 0', borderBottom: '3px solid grey' }}>Contact</Card.Title>
+                        <Card.Text>Phone: <b>{user.phone}</b></Card.Text>
+                        <Card.Text>Email: <b>{user.email}</b></Card.Text>
+                        <Card.Text>Address: <b>{user.address}</b></Card.Text>
+                    </Card.Body>
+                </Card>
+                <Card>
+                    <Card.Body>
+                        <Card.Title style={{ padding: '10px 0', borderBottom: '3px solid grey' }}>My Balance</Card.Title>
+                        <Card.Text>Savings balance:<br /><code>$1000</code></Card.Text>
+                        <Card.Text>Personal Checking balance: <br /><code>$1000</code></Card.Text>
+                        <Card.Text>Certificate of Deposit balance: <br /><code>$1000</code></Card.Text>
+                    </Card.Body>
+                </Card>
+            </CardDeck>
+            <div className="wrapper">
+                <p style={{ color: 'blue', padding: '0 0 0 0px' }}>My Accounts</p>
+                <Table striped hover style={{ fontSize: '14px' }} className="wrapper">
+                    <thead>
+                        <tr>
+                            <th>Account Number</th>
+                            <th>Account Type</th>
+                            <th>Balance</th>
+                            <th>Interest Rate</th>
+                            <th>Opening Date</th>
+                        </tr>
+                    </thead>
+                    <tbody style={{ textAlign: 'center' }}>
+                        {
+                            user.personalCheckingAccount != null ? user.personalCheckingAccount.map(pca =>
+                                <tr key={pca.accountNumber}>
+                                    <td>{pca.accountNumber}</td>
+                                    <td>Personal Checking</td>
+                                    <td>$ {pca.balance}</td>
+                                    <td>{pca.interestRate} %</td>
+                                    <td>{pca.openingDate}</td>
+                                </tr>
+                            )
+                                :
+                                null
+                        }
+                        {
+                            user.savingsAccounts != null ? user.savingsAccounts.map(pca =>
+                                <tr key={pca.accountNumber}>
+                                    <td>{pca.accountNumber}</td>
+                                    <td>Savings</td>
+                                    <td>$ {pca.balance}</td>
+                                    <td>{pca.interestRate} %</td>
+                                    <td>{pca.openingDate}</td>
+                                </tr>
+                            )
+                                :
+                                null
+                        }
+                        {
+                            user.dbaCheckingAccounts != null ? user.dbaCheckingAccounts.map(pca =>
+                                <tr key={pca.accountNumber}>
+                                    <td>{pca.accountNumber}</td>
+                                    <td>DBA Checking</td>
+                                    <td>$ {pca.balance}</td>
+                                    <td>{pca.interestRate} %</td>
+                                    <td>{pca.openingDate}</td>
+                                </tr>
+                            )
+                                :
+                                null
+                        }
+                    </tbody>
+                </Table>
+            </div>
         </div>
     )
 }

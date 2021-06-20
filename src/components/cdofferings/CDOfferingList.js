@@ -73,7 +73,7 @@ function CDOfferingList() {
             {successMessage &&
                 <Alert variant='success'>{successMessage}</Alert>}
             <h3 className="component-header">CD Offerings</h3>
-            <div className="">
+            <div className="wrapper">
                 <Table style={{ backgroundColor: 'white', textAlign: 'center' }} className="table table-striped table-bordered">
                     <thead>
                         <tr>

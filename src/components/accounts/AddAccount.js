@@ -6,7 +6,7 @@ import {
     Link,
     useRouteMatch
 } from "react-router-dom";
-import { Jumbotron, Navbar } from 'react-bootstrap'
+import { Jumbotron } from 'react-bootstrap'
 
 import SavingsAccount from './SavingsAccount';
 import CDAccount from './CDAccount'
@@ -14,8 +14,6 @@ import PersonalChecking from './PersonalChecking';
 import DBAChecking from './DBAChecking'
 import RegularIRA from './RegularIRA';
 
-
-const addSavings = '/savings'
 const addPersonalChecking = '/personal-checking'
 const addDbaChecking = '/dba-checking'
 const addCD = '/cd'
@@ -23,40 +21,42 @@ const regularIRA = '/regular-ira'
 
 function AddAccount() {
     const { url } = useRouteMatch();
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const day = date.getDate();
     return (
-        <React.Fragment>
+        <React.Fragment className="container">
             <Router>
                 <Jumbotron className="menu1">
                     <h5 className="component-header">Create Account</h5>
-                    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                        <Navbar.Brand ><Link style={{ fontSize: '16px' }} className="admin-main" to={url + addSavings}>Savings</Link></Navbar.Brand>
-                        <Navbar.Brand ><Link style={{ fontSize: '16px' }} className="admin-main" to={url + addPersonalChecking}>Personal Checking</Link></Navbar.Brand>
-                        <Navbar.Brand ><Link style={{ fontSize: '16px' }} className="admin-main" to={url + addDbaChecking}>DBA Checking</Link></Navbar.Brand>
-                        <Navbar.Brand ><Link style={{ fontSize: '16px' }} className="admin-main" to={url + addCD}>CD Account</Link></Navbar.Brand>
-                        <Navbar.Brand ><Link style={{ fontSize: '16px' }} className="admin-main" to={url + regularIRA}>Regular IRA</Link></Navbar.Brand>
-                    </Navbar>
-                    <code style={{ display: 'block', textAlign: 'right' }}>{year}/{month}/{day}</code>
-                    <Switch>
-                        <Route exact path={url + addSavings}>
-                            <SavingsAccount />
-                        </Route>
-                        <Route exact path={url + addPersonalChecking}>
-                            <PersonalChecking />
-                        </Route>
-                        <Route exact path={url + addDbaChecking}>
-                            <DBAChecking />
-                        </Route>
-                        <Route exact path={url + addCD}>
-                            <CDAccount />
-                        </Route>
-                        <Route exact path={url + regularIRA}>
-                            <RegularIRA />
-                        </Route>
-                    </Switch>
+
+                    <div className="row">
+                        <div className="col-md-2 add-account-dash">
+                            <Link style={{ fontSize: '16px' }} className="add-account-link" to={url}>Savings <i class="fas fa-chevron-right"></i></Link>
+                            <Link style={{ fontSize: '16px' }} className="add-account-link" to={url + addPersonalChecking}>Personal Checking <i class="fas fa-chevron-right"></i></Link>
+                            <Link style={{ fontSize: '16px' }} className="add-account-link" to={url + addDbaChecking}>DBA Checking <i class="fas fa-chevron-right"></i></Link>
+                            <Link style={{ fontSize: '16px' }} className="add-account-link" to={url + addCD}>CD Account <i class="fas fa-chevron-right"></i></Link>
+                            <Link style={{ fontSize: '16px' }} className="add-account-link" to={url + regularIRA}>Regular IRA <i class="fas fa-chevron-right"></i></Link>
+                            <Link style={{ fontSize: '16px' }} className="add-account-link" to={url + regularIRA}>Rollover IRA <i class="fas fa-chevron-right"></i></Link>
+                            <Link style={{ fontSize: '16px' }} className="add-account-link" to={url + regularIRA}>Roth IRA <i class="fas fa-chevron-right"></i></Link>
+                        </div>
+                        <div className=" add-account-container">
+                            <Switch>
+                                <Route exact path={url}>
+                                    <SavingsAccount />
+                                </Route>
+                                <Route exact path={url + addPersonalChecking}>
+                                    <PersonalChecking />
+                                </Route>
+                                <Route exact path={url + addDbaChecking}>
+                                    <DBAChecking />
+                                </Route>
+                                <Route exact path={url + addCD}>
+                                    <CDAccount />
+                                </Route>
+                                <Route exact path={url + regularIRA}>
+                                    <RegularIRA />
+                                </Route>
+                            </Switch>
+                        </div>
+                    </div>
                 </Jumbotron>
             </Router>
         </React.Fragment>

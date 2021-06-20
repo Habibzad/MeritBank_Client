@@ -12,22 +12,22 @@ const Landing = () => {
                     <img src="/images/logo.png" height="35" alt="logo" />
                     <ul className="nav ml-auto nav-flex-icons">
                         <li className="nav-item">
-                            <a className="nav-link waves-effect waves-light" href="https://www.meritamerica.org/">
+                            <a className="nav-link-header waves-effect waves-light" href="https://www.meritamerica.org/">
                                 Checking
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link waves-effect waves-light" href="https://www.meritamerica.org/">
+                            <a className="nav-link-header waves-effect waves-light" href="https://www.meritamerica.org/">
                                 Savings
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link waves-effect waves-light" href="https://www.meritamerica.org/">
+                            <a className="nav-link-header waves-effect waves-light" href="https://www.meritamerica.org/">
                                 CD Accounts
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link waves-effect waves-light" href="https://www.meritamerica.org/">
+                            <a className="nav-link-header waves-effect waves-light" href="https://www.meritamerica.org/">
                                 IRA Accounts
                             </a>
                         </li>

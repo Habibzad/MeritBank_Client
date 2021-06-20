@@ -75,7 +75,7 @@ function AccountHolders() {
             {successMessage &&
                 <Alert className="alert" variant='success'>{successMessage}</Alert>}
             <h3 className="component-header">Account Holders</h3>
-            <div className="">
+            <div className="wrapper">
                 <table className="table table-striped table-bordered" style={{ backgroundColor: 'white', textAlign: 'center' }}>
                     <thead>
                         <tr>

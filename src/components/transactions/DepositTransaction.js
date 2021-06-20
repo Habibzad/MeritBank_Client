@@ -52,8 +52,8 @@ function DepositTransaction() {
 
     return (
         <div>
-            <h3 className="component-header">Deposit</h3>
-            <Form onSubmit={handleSubmit}>
+            <h3 className="transfer-header"><i class="fas fa-chevron-circle-right"></i> Deposit</h3>
+            <Form onSubmit={handleSubmit} className="wrapper">
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
                     <Form.Label column sm={2}>Target Account</Form.Label>
                     <Col sm={10}>
@@ -88,7 +88,7 @@ function DepositTransaction() {
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm={2}> Roles</Form.Label>
+                    <Form.Label column sm={2}>Transaction Type</Form.Label>
                     <select className="form-select" onChange={e => setType(e.target.value)}>
                         <option disabled>Select</option>
                         <option >Cash</option>

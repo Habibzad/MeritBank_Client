@@ -2,17 +2,12 @@
   /* Background Color */
 --bg-primary: #C84B31;
 --bg-secondary: #3A6351;
---bg-light: #EEEBDD;
+--bg-light: #fdfaee;
 
 /* Font Color */
---fc-light: #eeeeee;
+--fc-light: #fdfaee;
 --fc-dark: #4d4d4d;
 --accent: #fcce02;
-}
-
-
-body{
-  background-color: var(--bg-light)
 }
 
 .logout-btn{
@@ -148,12 +143,22 @@ body{
   color: var(--accent)
 }
 
+.login-btn-dark{
+  background-color: #b8533f;
+  color: #ffffff;
+}
+
+.login-btn-dark:hover{
+  background-color: #863e30;
+  color: #ffffff;
+}
+
 #d3{
   border: none;
 }
 .menu{
   background-color: #ec674c;
-  padding: 0 47px;
+  padding: 0;
 }
 
 .admin-header{
@@ -178,35 +183,36 @@ body{
   text-align: center;
   font-size: 17px;
   color: #ffffff;
-  width: 130px;
-  border: 1px solid #ffffff;
-  border-bottom: 5px solid var(--bg-primary);
-  border-top: none;
-  height: 100%;
+  width: 150px;
+  border-right: 1px solid #ffffff;
+  border-bottom: 5px solid #ec674c;
+  padding-top: 5px;
   line-height: 40px;
 }
 
 .nav-link{
-  border: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
   border-top: none;
-  border-bottom: 5px solid var(--bg-primary);
+  border-bottom: 5px solid #ec674c;
   height: 100%;
-  width: 130px;
+  width: 160px;
+  padding-top: 13px;
   color: #ffffff;
+  text-align: center;
 }
 
 .dash-menu:hover,
 .nav-link:hover{
   text-decoration: none;
-  border-bottom: 5px solid var(--accent);
-  color: var(--accent);
+  border-bottom: 5px solid #ffffff;
+  color: #ffffff;
 }
 
 
 
 .admin-top-header{
   padding: 0;
-  background-color: #ffffff;
+  background-color: #fdfbd0;
 }
 
 .dash-header{
@@ -223,22 +229,36 @@ body{
 }
 
 .component-header{
-  height: 60px;
-  line-height: 50px;
-  background-color: #ffffff;
+  height: 40px;
+  line-height: 40px;
+  background-color: #414141;
   text-align: center;
   font-size: 20px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 700;
   text-transform: uppercase;
-  color: #343A40;
-  padding: 5px;
-  border: 1px solid #343A40
+  color: #b6b6b6;
+  padding: 0 45px;
+  margin: 0;
+  border: 1px solid #b6b6b6;
+  border-bottom: none;
 }
 
-.menu1{
-  height: 90vh;
-  background-color: #ffffff;
+.transfer-header{
+  height: 40px;
+  line-height: 40px;
+  background-color: #fdfbd0;
+  text-align: center;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #000000;
+  padding: 0 20px;
+  margin: 0;
+  /* border: 1px solid #b6b6b6; */
+  border-bottom: none;
+  text-align: left;
 }
 
 .form-select{
@@ -273,10 +293,83 @@ body{
   background-color: #ffffff;
 }
 
+/* link */
+.nav-link-header{
+  font-weight: 500;
+  border-bottom: 5px solid #ffffff;
+  height: 100%;
+  width: 100px;
+  color: #ec674c;
+  text-align: center;
+  margin-left: 10px;
+  padding-bottom: 5px;
+  margin-bottom: 0;
+}
+
+
+.nav-link-header:hover{
+  text-decoration: none;
+  border-bottom: 5px solid #ec674c;
+  color: #ec674c;
+}
+
 .footer-link{
   color: var(--accent);
 }
 
 .footer-link:hover{
   color: #ffffff;
+}
+
+.add-account-dash{
+  border: 1px solid #dbdbdb;
+  padding: 0;
+  background-color: #ec674c;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 0 15px;
+}
+
+.add-account-link{
+  padding: 10px;
+  color: #ffffff;
+border-bottom: 1px solid rgb(255, 255, 255);}
+  
+
+.add-account-link:hover{
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.add-account-container{
+  border: none;
+  width: 945px;
+  margin: 0;
+  height: 50vh;
+}
+
+.create-account-wrapper{
+  padding: 20px;
+  height: 50vh;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-left: none;
+  background-color: #f8f8f8;
+}
+
+.fa-chevron-right{
+  font-size: 12px;
+}
+
+.menu1{
+  height: 90vh;
+  background-color: #ffffff;
+  padding: 0;
+}
+
+.container{
+  padding: 0;
+}
+
+.wrapper{
+  padding: 20px 50px;
 }

@@ -40,8 +40,8 @@ function PersonalChecking() {
             .catch(error => console.log('error', error));
     }
     return (
-        <div style={{ padding: '20px 10px', border: '1px solid rgba(0,0,0,0.2)', backgroundColor: '#f8f8f8' }}>
-            {/* <h4 style={{ marginBottom: '30px' }}>Add Checking Account</h4> */}
+        <div className="">
+            <h4 style={{ marginBottom: '30px' }}>Personal Account</h4>
             <Form onSubmit={handleSubmit}>
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                     <Form.Label column sm={2}>Account Holder ID</Form.Label>
@@ -69,7 +69,7 @@ function PersonalChecking() {
                 <Form.Group as={Row} className="mb-3">
                     <Col sm={{ span: 10, offset: 2 }}>
                         <Button variant="dark" type="submit">Create Account</Button>
-                        <Button variant="info" onClick={() => history.push('/admin/accounts')} style={{ marginLeft: '20px' }}>Cancel</Button>
+                        <Button variant="warning" onClick={() => history.push('/admin/accounts')} style={{ marginLeft: '20px' }}>Cancel</Button>
                     </Col>
                 </Form.Group>
             </Form>

@@ -1,7 +1,7 @@
 import { AuthorizationContext } from '../../AuthorizationContext'
 import React, { useState, useContext } from 'react'
 import { Redirect, useHistory } from 'react-router-dom'
-import { Form, Button, Alert } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import { CD_OFFERINGS } from '../../ResourceEndpoints';
 
 function AddCDOffering() {

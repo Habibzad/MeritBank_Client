@@ -77,11 +77,11 @@ function Login() {
 
 
     return (
-        <div className="container login" style={{ width: 400 }}>
+        <div className="login" style={{ width: 400, marginTop: '10rem' }}>
             {errorMessage &&
                 <Alert variant='warning'>{errorMessage}</Alert>}
             <Form onSubmit={e => handleSubmit(e)}>
-                <h2 className="text-center">Log In</h2>
+                <h2 className="text-center" style={{ color: '#ec674c', fontSize: '28px' }}>Log In</h2>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>User Name</Form.Label>
                     <Form.Control
@@ -106,7 +106,8 @@ function Login() {
                 </Form.Group>
 
                 <Button
-                    variant="dark"
+                    variant=""
+                    className="login-btn-dark"
                     type="submit"
                     style={{ width: 360, marginTop: '20px' }}>Login
                 </Button>

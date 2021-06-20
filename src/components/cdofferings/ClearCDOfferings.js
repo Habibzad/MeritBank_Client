@@ -39,7 +39,7 @@ function ClearCDOfferings() {
             {successMessage &&
                 <Alert variant='success'>{successMessage}</Alert>}
             <h3 className="component-header">Clear CD Offering</h3>
-            <Card className="text-center">
+            <Card className="text-center wrapper">
                 <Card.Body>
                     <Card.Title>Click the submit button to clear all CD offerings</Card.Title>
                     <Card.Text> Are you sure?</Card.Text>

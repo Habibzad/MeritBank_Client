@@ -76,7 +76,6 @@ function UserDash() {
                     <Link className="dash-menu" active to={url + cdOfferings}>CD Offerings</Link>
                 </Navbar>
                 <Jumbotron className="menu1">
-                    <p>Welcome, {user}</p>
                     <Switch>
                         <Route exact path={url}>
                             <UserProfile />

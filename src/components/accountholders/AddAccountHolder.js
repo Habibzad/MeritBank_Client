@@ -68,7 +68,7 @@ function AddAccountHolder() {
     return (
         <div>
             <h3 className="component-header">Create Account Holder</h3>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} className="wrapper">
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                     <Form.Label column sm={2}>First Name</Form.Label>
                     <Col sm={10}>
@@ -149,7 +149,7 @@ function AddAccountHolder() {
                 <Form.Group as={Row} className="mb-3">
                     <Col sm={{ span: 10, offset: 2 }}>
                         <Button variant="dark" type="submit">Submit</Button>
-                        <Button variant="info" onClick={() => history.push('/admin/accountholders')} style={{ marginLeft: '20px' }}>Cancel</Button>
+                        <Button variant="warning" onClick={() => history.push('/admin/accountholders')} style={{ marginLeft: '20px' }}>Cancel</Button>
                     </Col>
                 </Form.Group>
             </Form>

@@ -66,7 +66,7 @@ function CreateUser() {
     return (
         <div>
             <h3 className="component-header">Create User</h3>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} className="wrapper">
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                     <Form.Label column sm={2}>User Name</Form.Label>
                     <Col sm={10}>

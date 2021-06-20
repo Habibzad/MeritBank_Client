@@ -70,42 +70,45 @@ function UsersList() {
                 <Alert className="alert" variant='success'>{successMessage}</Alert>}
             <h3 className="component-header">Users List</h3>
 
-            <Table striped bordered hover style={{ backgroundColor: 'white', textAlign: 'center' }}>
-                <thead>
-                    <tr>
-                        <th>
-                            <Link to={`create-user`}><i className="fas fa-plus text-primary" style={{ cursor: 'pointer' }}></i></Link>
-                        </th>
-                        <th>ID</th>
-                        <th>Username</th>
-                        <th>Password</th>
-                        <th>IsActive</th>
-                        <th>Role</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        users.map(user =>
-                            <tr key={user.id}>
-                                <td>
-                                    <Link to={`udate-user/${user.id}`}><i className="fas fa-pencil-alt text-warning" style={{ marginRight: '30px', cursor: 'pointer' }}></i></Link>
-                                    <i className="fas fa-user-slash text-danger" style={{ cursor: 'pointer' }}
-                                        onClick={() => {
-                                            if (window.confirm(`Are you sure you want to delete ${user.userName}`)) {
-                                                deleteUser(user.id);
-                                            }
-                                        }}>
-                                    </i>
-                                </td>
-                                <td>{user.id}</td>
-                                <td>{user.userName}</td>
-                                <td>{user.password}</td>
-                                <td>{user.active ? "Yes" : null}</td>
-                                <td>{user.roles === "ROLE_ADMIN" ? "Admin" : user.roles === "ROLE_USER" ? "User" : null}</td>
-                            </tr>)
-                    }
-                </tbody>
-            </Table>
+            <div className="wrapper">
+                <Table striped bordered hover style={{ backgroundColor: 'white', textAlign: 'center' }}>
+                    <thead>
+                        <tr>
+                            <th>
+                                <Link to={`create-user`}><i className="fas fa-plus text-primary" style={{ cursor: 'pointer' }}></i></Link>
+                            </th>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>IsActive</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            users.map(user =>
+                                <tr key={user.id}>
+                                    <td>
+                                        <Link to={`udate-user/${user.id}`}><i className="fas fa-pencil-alt text-warning" style={{ marginRight: '30px', cursor: 'pointer' }}></i></Link>
+                                        <i className="fas fa-user-slash text-danger" style={{ cursor: 'pointer' }}
+                                            onClick={() => {
+                                                if (window.confirm(`Are you sure you want to delete ${user.userName}`)) {
+                                                    deleteUser(user.id);
+                                                }
+                                            }}>
+                                        </i>
+                                    </td>
+                                    <td>{user.id}</td>
+                                    <td>{user.userName}</td>
+                                    <td>{user.password}</td>
+                                    <td>{user.active ? "Yes" : null}</td>
+                                    <td>{user.roles === "ROLE_ADMIN" ? "Admin" : user.roles === "ROLE_USER" ? "User" : null}</td>
+                                </tr>)
+                        }
+                    </tbody>
+                </Table>
+            </div>
+
         </div>
     )
 }

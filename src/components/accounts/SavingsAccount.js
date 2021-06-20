@@ -40,7 +40,7 @@ function SavingsAccount() {
             .catch(error => console.log('error', error));
     }
     return (
-        <div style={{ padding: '20px 10px', border: '1px solid rgba(0,0,0,0.2)', backgroundColor: '#f8f8f8' }}>
+        <div className="create-account-wrapper">
             <h4 style={{ marginBottom: '30px' }}>Add Savings Account</h4>
             <Form onSubmit={handleSubmit}>
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
@@ -69,7 +69,7 @@ function SavingsAccount() {
                 <Form.Group as={Row} className="mb-3">
                     <Col sm={{ span: 10, offset: 2 }}>
                         <Button variant="dark" type="submit">Submit</Button>
-                        <Button variant="info" onClick={() => history.push('/admin/accounts')} style={{ marginLeft: '20px' }}>Cancel</Button>
+                        <Button variant="warning" onClick={() => history.push('/admin')} style={{ marginLeft: '20px' }}>Cancel</Button>
                     </Col>
                 </Form.Group>
             </Form>

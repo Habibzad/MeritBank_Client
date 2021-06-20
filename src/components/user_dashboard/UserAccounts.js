@@ -23,7 +23,7 @@ function UserAccounts() {
 
     const CheckingAccounts = () => {
         return (
-            <Table striped hover style={{ fontSize: '14px' }}>
+            <Table striped hover style={{ fontSize: '14px' }} className="wrapper">
                 <thead>
                     <tr>
                         <th>Account Number</th>

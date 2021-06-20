@@ -25,6 +25,7 @@ import ClearCDOfferings from '../cdofferings/ClearCDOfferings'
 import AddAccountHolder from '../accountholders/AddAccountHolder';
 import UpdateAccountHolder from '../accountholders/UpdateAccountHolder';
 import TransactionsList from '../transactions/TransactionsList';
+import Transactions from '../transactions/Transactions'
 import TransferTransaction from '../transactions/TransferTransaction';
 import DepositTransaction from '../transactions/DepositTransaction';
 import WithdrawTransaction from '../transactions/WithdrawTransaction';
@@ -51,7 +52,7 @@ const updateAccount = '/update-account'
 const usersList = '/users-list'
 const withdraw = '/withdraw'
 const profile = '/profile/:id'
-
+const trans = '/trans'
 
 function AdminDash() {
     const [store, setStore] = useContext(AuthorizationContext)
@@ -96,28 +97,23 @@ function AdminDash() {
                         <Form className="d-flex">
                             <FormControl
                                 type="search"
-                                placeholder="How can we help you?"
+                                placeholder="Search"
                                 className="mr-2"
                                 aria-label="Search"
                             />
-                            <Button variant="warning"><i class="fas fa-search"></i></Button>
+                            <Button variant="warning"><i className="fas fa-search"></i></Button>
                         </Form>
                     </Navbar.Collapse>
                 </Navbar>
                 <Navbar bg="" variant="" className="menu">
-                    <Link className="dash-menu" active to={url}>Home</Link>
-                    <Link className="dash-menu" to={url + usersList}>Users</Link>
-                    <Link className="dash-menu" to={url + accounts}>Accounts</Link>
-                    <Link className="dash-menu" to={url + accountholders}>AccountHolders</Link>
+                    <Link className="dash-menu" active to={url}><i className="fas fa-home"></i> Home</Link>
+                    <Link className="dash-menu" to={url + usersList}><i className="fas fa-user"></i> Users</Link>
+                    <Link className="dash-menu" to={url + accounts}><i className="fas fa-university"></i> Accounts</Link>
+                    <Link className="dash-menu" to={url + accountholders} style={{ padding: '5px 30px 0', width: '220px' }}><i class="fas fa-users"></i> AccountHolders</Link>
+                    <Link className="dash-menu" to={url + trans}><i class="fas fa-money-bill-alt"></i> Transactions</Link>
                     <NavDropdown title="CDOfferings">
                         <NavDropdown.Item ><Link to={url + addfferingslist}>CDOfferings</Link></NavDropdown.Item>
                         <NavDropdown.Item ><Link className="dropdown_menu" to={url + clearOfferings}>Clear CDOfferings</Link></NavDropdown.Item>
-                    </NavDropdown>
-                    <NavDropdown title="Transactions" className="d-flex">
-                        <NavDropdown.Item ><Link className="dropdown_menu" to={url + transactions}>All Transactions</Link></NavDropdown.Item>
-                        <NavDropdown.Item ><Link className="dropdown_menu" to={url + transfer}>Transfer</Link></NavDropdown.Item>
-                        <NavDropdown.Item ><Link className="dropdown_menu" to={url + deposit}>Deposit</Link></NavDropdown.Item>
-                        <NavDropdown.Item ><Link className="dropdown_menu" to={url + withdraw}>Withdraw</Link></NavDropdown.Item>
                     </NavDropdown>
                 </Navbar>
                 <Jumbotron className="menu1">
@@ -179,6 +175,9 @@ function AdminDash() {
                         </Route>
                         <Route path={url + withdraw}>
                             <WithdrawTransaction />
+                        </Route>
+                        <Route path={url + trans}>
+                            <Transactions />
                         </Route>
                         <Route path={url + withdraw}>
                             <NoMatch />

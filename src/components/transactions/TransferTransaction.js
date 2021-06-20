@@ -57,8 +57,8 @@ function TransferTransaction() {
 
     return (
         <div>
-            <h3 className="component-header">Transfer</h3>
-            <Form onSubmit={handleSubmit}>
+            <h3 className="transfer-header"><i class="fas fa-chevron-circle-right"></i> Transfer</h3>
+            <Form onSubmit={handleSubmit} className="wrapper">
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                     <Form.Label column sm={2}>Source Account</Form.Label>
                     <Col sm={10}>
@@ -103,14 +103,6 @@ function TransferTransaction() {
                         />
                     </Col>
                 </Form.Group>
-                {/* <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm={2}> Roles</Form.Label>
-                    <select className="form-select" onChange={e => setUserRole(e.target.value)}>
-                        <option >Select</option>
-                        <option value="ROLE_USER">User</option>
-                        <option value="ROLE_ADMIN">Admin</option>
-                    </select>
-                </Form.Group> */}
                 <Form.Group as={Row} className="mb-3">
                     <Col sm={{ span: 10, offset: 2 }}>
                         <Button variant="dark" type="submit">Submit</Button>
