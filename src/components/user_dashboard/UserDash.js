@@ -14,29 +14,20 @@ import {
 import UserProfile from './UserProfile'
 import UserAccounts from './UserAccounts'
 import UserCDOffering from './UserCDOffering'
+import Logout from '../shared/Logout';
 //Component URLs
 const cdOfferings = '/cd-offerings'
 const accounts = './accounts'
 
 function UserDash() {
-    const [store, setStore] = useContext(AuthorizationContext)
+    const [store] = useContext(AuthorizationContext)
     const isLoggedIn = store.isLoggedIn;
     const role = store.role;
-    const user = store.username
     const { url } = useRouteMatch();
+    const { logout } = Logout();
 
     if (!isLoggedIn && role !== "[ROLE_ADMIN]") {
         return <Redirect to="/" />
-    }
-
-    const logout = () => {
-        setStore({
-            jwt: '',
-            role: '',
-            username: '',
-            isLoggedIn: false
-        })
-        sessionStorage.clear()
     }
 
     return (

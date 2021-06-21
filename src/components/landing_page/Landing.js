@@ -1,8 +1,9 @@
 import React from 'react';
-import '../App.css';
 import { Navbar, Container } from 'react-bootstrap'
-import Header from './shared/Header';
-import Footer from './shared/Footer'
+import Header from '../shared/Header';
+import Footer from '../shared/Footer'
+import './landing.css';
+
 const Landing = () => {
     return (
         <div className="App">

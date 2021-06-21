@@ -1,0 +1,63 @@
+.b13{
+  width: 100%; 
+  height: 360px !important;
+    /* background: linear-gradient(25deg,rgb(206, 18, 18),rgba(240, 84, 84, 0.3)) */
+}
+.b12{
+  background: url('https://www.pinsentmasons.com/-/media/images/special-reports/openbanking-1440x700.jpg?h=583&la=en-gb&w=1200&hash=90BA1A8132AB74B2316FA934A39E1097') top center / cover no-repeat;
+}
+.b14{
+  margin-top: -310px
+}
+
+/* login  */
+.login-btn{
+  color: #ffffff
+}
+
+.login-btn:hover{
+  text-decoration: none;
+  color: var(--accent)
+}
+
+.header,
+.page-footer{
+  background-color: var(--bg-primary)
+}
+
+/* link */
+.nav-link-header{
+  font-weight: 500;
+  border-bottom: 5px solid #ffffff;
+  height: 100%;
+  width: 100px;
+  color: #ec674c;
+  text-align: center;
+  margin-left: 10px;
+  padding-bottom: 5px;
+  margin-bottom: 0;
+}
+
+.nav-link-header:hover{
+  text-decoration: none;
+  border-bottom: 5px solid #ec674c;
+  color: #ec674c;
+}
+
+
+.landing-text{
+  color: var(--bg-primary);
+}
+
+.landing-jumbo{
+  background-color: #ffffff;
+}
+
+.footer-link{
+  color: var(--accent);
+}
+
+.footer-link:hover{
+  color: #ffffff;
+}
+  

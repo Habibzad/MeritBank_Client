@@ -57,8 +57,8 @@ function AddCDOffering() {
 
     return (
         <div className="container">
-            <Form onSubmit={handleSubmit}>
-                <h3 className="component-header">Add CD Offering</h3>
+            <h3 className="component-header">Add CD Offering</h3>
+            <Form onSubmit={handleSubmit} className="wrapper">
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Interest Rate</Form.Label>
                     <Form.Control value={interestRate} onChange={(e) => setInterestRate(e.target.value)} type="text" placeholder="Interest Rate" />
@@ -70,7 +70,7 @@ function AddCDOffering() {
                 </Form.Group>
 
                 <Button variant="dark" type="submit">Submit</Button>
-                <Button variant="info" onClick={() => history.push('/admin/addfferingslist')} style={{ marginLeft: '20px' }}>Cancel</Button>
+                <Button variant="warning" onClick={() => history.push('/admin/addfferingslist')} style={{ marginLeft: '20px' }}>Cancel</Button>
             </Form>
         </div>
     )

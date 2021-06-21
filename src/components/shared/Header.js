@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthorizationContext } from '../../AuthorizationContext'
 import { Link } from 'react-router-dom'
-import { Navbar, NavDropdown } from 'react-bootstrap'
+import { Navbar } from 'react-bootstrap'
 import '../../App.css';
 
 function Header() {
@@ -16,7 +16,7 @@ function Header() {
             username: '',
             isLoggedIn: false
         })
-        sessionStorage.clear()
+        localStorage.clear()
     }
 
     const loggedInUser = `${user}`
@@ -25,11 +25,9 @@ function Header() {
             {
                 isLoggedIn
                     ?
-                    <NavDropdown title={loggedInUser}>
-                        <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
-                    </NavDropdown>
+                    <Link className="login-btn" to="/login" onClick={logout}>Hello, {loggedInUser}! Logout</Link>
                     :
-                    <Link className="login-btn" to="/login"><i className="fas fa-user"></i> Login</Link>
+                    <Link className="login-btn" to="/login"><i className="fas fa-user" style={{ marginRight: '7px' }}></i>Login</Link>
             }
         </Navbar>
     );

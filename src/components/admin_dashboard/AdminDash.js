@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { AuthorizationContext } from '../../AuthorizationContext'
-import { Form, FormControl, Button, Jumbotron, Navbar, NavDropdown } from 'react-bootstrap'
+import { Form, FormControl, Button, Jumbotron, Navbar } from 'react-bootstrap'
 
 import {
     BrowserRouter as Router,
@@ -21,7 +21,6 @@ import CreateUser from '../users/CreateUser'
 import UpdateUser from '../users/UpdateUser';
 import UpdateAccount from '../accounts/UpdateAccount'
 import DeleteCDOffering from '../cdofferings/DeleteCDOffering'
-import ClearCDOfferings from '../cdofferings/ClearCDOfferings'
 import AddAccountHolder from '../accountholders/AddAccountHolder';
 import UpdateAccountHolder from '../accountholders/UpdateAccountHolder';
 import TransactionsList from '../transactions/TransactionsList';
@@ -35,6 +34,7 @@ import Profile from '../accountholders/Profile';
 import NoMatch from './NoMatch';
 import './admin.css'
 
+import Logout from '../shared/Logout';
 //Component URLs
 const addAccountHolder = '/add-account-holder'
 const addfferingslist = '/addfferingslist'
@@ -42,7 +42,6 @@ const accountholders = '/accountholders'
 const accounts = '/accounts'
 const addcdofferings = '/addcdofferomg'
 const addAccount = '/add-account'
-const clearOfferings = '/clear-offerings'
 const createUser = '/create-user'
 const deleteCDOffering = '/delete-cdoffering'
 const deposit = '/deposit'
@@ -55,24 +54,14 @@ const profile = '/profile/:id'
 const trans = '/trans'
 
 function AdminDash() {
-    const [store, setStore] = useContext(AuthorizationContext)
+    const [store] = useContext(AuthorizationContext)
     const isLoggedIn = store.isLoggedIn;
     const role = store.role;
-    const user = store.username
     const { url } = useRouteMatch();
+    const { logout } = Logout();
 
     if (!isLoggedIn && role !== "[ROLE_ADMIN]") {
         return <Redirect to="/" />
-    }
-
-    const logout = () => {
-        setStore({
-            jwt: '',
-            role: '',
-            username: '',
-            isLoggedIn: false
-        })
-        sessionStorage.clear()
     }
 
     return (
@@ -109,12 +98,9 @@ function AdminDash() {
                     <Link className="dash-menu" active to={url}><i className="fas fa-home"></i> Home</Link>
                     <Link className="dash-menu" to={url + usersList}><i className="fas fa-user"></i> Users</Link>
                     <Link className="dash-menu" to={url + accounts}><i className="fas fa-university"></i> Accounts</Link>
-                    <Link className="dash-menu" to={url + accountholders} style={{ padding: '5px 30px 0', width: '220px' }}><i class="fas fa-users"></i> AccountHolders</Link>
                     <Link className="dash-menu" to={url + trans}><i class="fas fa-money-bill-alt"></i> Transactions</Link>
-                    <NavDropdown title="CDOfferings">
-                        <NavDropdown.Item ><Link to={url + addfferingslist}>CDOfferings</Link></NavDropdown.Item>
-                        <NavDropdown.Item ><Link className="dropdown_menu" to={url + clearOfferings}>Clear CDOfferings</Link></NavDropdown.Item>
-                    </NavDropdown>
+                    <Link className="dash-menu" to={url + addfferingslist}>CDOfferings</Link>
+                    <Link className="dash-menu" to={url + accountholders} style={{ padding: '5px 5px 0', width: '220px' }}><i class="fas fa-users"></i> AccountHolders</Link>
                 </Navbar>
                 <Jumbotron className="menu1">
                     <Switch>
@@ -130,7 +116,6 @@ function AdminDash() {
                         <Route exact path={url + '/udate-user/:id'}>
                             <UpdateUser />
                         </Route>
-
                         <Route exact path={url + accounts}>
                             <Accounts />
                         </Route>
@@ -160,9 +145,6 @@ function AdminDash() {
                         </Route>
                         <Route path={url + deleteCDOffering}>
                             <DeleteCDOffering />
-                        </Route>
-                        <Route path={url + clearOfferings}>
-                            <ClearCDOfferings />
                         </Route>
                         <Route path={url + transactions}>
                             <TransactionsList />

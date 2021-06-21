@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useHistory } from 'react-router-dom'
-import { AuthorizationContext } from '../AuthorizationContext'
+import { useHistory, Link } from 'react-router-dom'
+import { AuthorizationContext } from '../../AuthorizationContext'
 import { Form, Button, Alert } from 'react-bootstrap';
 import axios from 'axios'
-import { BASE_URL_ADD } from '../ResourceEndpoints'
+import { BASE_URL_ADD } from '../../ResourceEndpoints'
 import jwt_decode from "jwt-decode";
-
+import './login.css';
 function Login() {
     const [store, setStore] = useContext(AuthorizationContext)
     const [isLoggedIn, setLoggedIn] = useState(false)
@@ -75,7 +75,6 @@ function Login() {
         })
     }
 
-
     return (
         <div className="login" style={{ width: 400, marginTop: '10rem' }}>
             {errorMessage &&
@@ -111,6 +110,7 @@ function Login() {
                     type="submit"
                     style={{ width: 360, marginTop: '20px' }}>Login
                 </Button>
+                <Link className="login-component-link" active to={"/"}>Back to Home</Link>
             </Form>
         </div>
     )

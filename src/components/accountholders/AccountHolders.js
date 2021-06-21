@@ -2,7 +2,7 @@ import { AuthorizationContext } from '../../AuthorizationContext'
 import React, { useState, useEffect, useContext } from 'react'
 import { Redirect, useHistory, Link } from 'react-router-dom'
 import axios from 'axios'
-import { Table, Alert } from 'react-bootstrap'
+import { Alert } from 'react-bootstrap'
 import { BASE_URL_AUTHENTICATE } from '../../ResourceEndpoints';
 
 function AccountHolders() {
@@ -105,7 +105,7 @@ function AccountHolders() {
                                     </td>
                                     <td>{accountHolder.id}</td>
                                     <td>{accountHolder.firstName} {accountHolder.lastName}</td>
-                                    <td><Link to={`profile/${accountHolder.id}`}>Profile</Link></td>
+                                    <td className="profile"><Link to={`profile/${accountHolder.id}`}>Profile</Link></td>
                                 </tr>)
                         }
                     </tbody>

@@ -135,7 +135,7 @@ function UpdateUser(props) {
                 <Form.Group as={Row} className="mb-3">
                     <Col sm={{ span: 10, offset: 2 }}>
                         <Button variant="dark" type="submit">Submit</Button>
-                        <Button variant="info" onClick={() => history.push('/admin/users-list')} style={{ marginLeft: '20px' }}>Cancel</Button>
+                        <Button variant="warning" onClick={() => history.push('/admin/users-list')} style={{ marginLeft: '20px' }}>Cancel</Button>
                     </Col>
                 </Form.Group>
             </Form>
