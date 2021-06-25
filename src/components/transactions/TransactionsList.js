@@ -38,7 +38,7 @@ function TransactionsList() {
             .catch(error => console.log('error', error));
     }
 
-    console.log(transactions)
+    let counter = 1
     return (
         <div className="container">
             {successMessage &&
@@ -48,6 +48,7 @@ function TransactionsList() {
                 <table style={{ backgroundColor: 'white', textAlign: 'center' }} className="table table-striped table-bordered">
                     <thead>
                         <tr>
+                            <th><i class="fas fa-hashtag fa-col"></i></th>
                             <th>No</th>
                             <th>Date</th>
                             <th>Description</th>
@@ -61,6 +62,7 @@ function TransactionsList() {
                         {
                             transactions.map(transaction =>
                                 <tr key={transaction.id}>
+                                    <td>{counter++}</td>
                                     <td>{transaction.id}</td>
                                     <td>{transaction.transactionDate}</td>
                                     <td>{transaction.description}</td>

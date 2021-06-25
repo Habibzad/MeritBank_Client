@@ -14,6 +14,7 @@ function AddAccountHolder() {
     const [firstName, setFirstName] = useState('')
     const [middleName, setMiddleName] = useState('')
     const [lastName, setLastName] = useState('')
+    const [dob, setDob] = useState('')
     const [ssn, setSSN] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
@@ -34,10 +35,11 @@ function AddAccountHolder() {
             "Content-Type": "application/json"
         }
 
-        var payload = JSON.stringify({
+        var raw = JSON.stringify({
             "firstName": firstName,
             "middleName": middleName,
             "lastName": lastName,
+            "dob": dob,
             "ssn": ssn,
             "phone": phone,
             "email": email,
@@ -47,15 +49,15 @@ function AddAccountHolder() {
         var requestOptions = {
             method: 'POST',
             headers: myHeaders,
-            body: payload,
+            body: raw,
             redirect: 'follow'
         };
 
-        fetch('http://localhost:8080/api/accountholders/', requestOptions)
+        fetch("http://localhost:8080/api/accountholders", requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log(result)
-                setStore({ ...store, successMessage: 'Account Holder added successfully!' });
+                setStore({ ...store, successMessage: "AccountHolder Created Successfully!" })
                 history.push('/admin/accountholders')
             })
             .catch(error => console.log('error', error));
@@ -66,24 +68,27 @@ function AddAccountHolder() {
     }
 
     return (
-        <div>
-            <h3 className="component-header">Create Account Holder</h3>
-            <Form onSubmit={handleSubmit} className="wrapper">
-                <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-                    <Form.Label column sm={2}>First Name</Form.Label>
+        <div >
+            <h2 className="component-header">Create Account Holder</h2>
+            <Form onSubmit={handleSubmit} className="wrapper" style={{ margin: '1rem 2rem', backgroundColor: '#fcfcfc', border: '1px solid #f4f4f4' }}>
+                <Form.Group as={Row} className="mb-2" controlId="formHorizontalEmail">
+                    <Form.Label column sm={2}><i className="fas fa-user"></i> First Name</Form.Label>
                     <Col sm={10}>
                         <Form.Control
+                            required
+                            style={{ border: 'none', borderBottom: '1px solid grey', borderRadius: '0' }}
                             type="text"
-                            placeholder="First Name"
+                            placeholder="First Name here..."
                             value={firstName}
                             onChange={e => setFirstName(e.target.value)}
                         />
                     </Col>
                 </Form.Group>
-                <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
-                    <Form.Label column sm={2}>Middle Name</Form.Label>
+                <Form.Group as={Row} className="mb-2" controlId="formHorizontalPassword">
+                    <Form.Label column sm={2}><i class="fas fa-user"></i> Middle Name</Form.Label>
                     <Col sm={10}>
                         <Form.Control
+                            style={{ border: 'none', borderBottom: '1px solid grey', borderRadius: '0' }}
                             type="text"
                             placeholder="Middle Name"
                             value={middleName}
@@ -91,10 +96,11 @@ function AddAccountHolder() {
                         />
                     </Col>
                 </Form.Group>
-                <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
-                    <Form.Label column sm={2}>Last Name</Form.Label>
+                <Form.Group as={Row} className="mb-2" controlId="formHorizontalPassword">
+                    <Form.Label column sm={2}> <i class="fas fa-user"></i> Last Name</Form.Label>
                     <Col sm={10}>
                         <Form.Control
+                            style={{ border: 'none', borderBottom: '1px solid grey', borderRadius: '0' }}
                             type="text"
                             placeholder="Last Name"
                             value={lastName}
@@ -102,10 +108,23 @@ function AddAccountHolder() {
                         />
                     </Col>
                 </Form.Group>
-                <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
-                    <Form.Label column sm={2}>SSN</Form.Label>
+                <Form.Group as={Row} className="mb-2" controlId="formHorizontalPassword">
+                    <Form.Label column sm={2}><i class="fas fa-calendar-alt"></i> Date of Birth</Form.Label>
                     <Col sm={10}>
                         <Form.Control
+                            style={{ border: 'none', borderBottom: '1px solid grey', borderRadius: '0' }}
+                            type="date"
+                            placeholder="Date of birth"
+                            value={dob}
+                            onChange={e => setDob(e.target.value)}
+                        />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-2" controlId="formHorizontalPassword">
+                    <Form.Label column sm={2}><i class="fas fa-address-card"></i> SSN</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            style={{ border: 'none', borderBottom: '1px solid grey', borderRadius: '0' }}
                             type="text"
                             placeholder="Social Security Number"
                             value={ssn}
@@ -113,10 +132,11 @@ function AddAccountHolder() {
                         />
                     </Col>
                 </Form.Group>
-                <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
-                    <Form.Label column sm={2}>Phone</Form.Label>
+                <Form.Group as={Row} className="mb-2" controlId="formHorizontalPassword">
+                    <Form.Label column sm={2}><i class="fas fa-phone-square"></i> Phone</Form.Label>
                     <Col sm={10}>
                         <Form.Control
+                            style={{ border: 'none', borderBottom: '1px solid grey', borderRadius: '0' }}
                             type="text"
                             placeholder="Phone Number"
                             value={phone}
@@ -124,10 +144,11 @@ function AddAccountHolder() {
                         />
                     </Col>
                 </Form.Group>
-                <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
-                    <Form.Label column sm={2}>Email</Form.Label>
+                <Form.Group as={Row} className="mb-2" controlId="formHorizontalPassword">
+                    <Form.Label column sm={2}><i class="fas fa-envelope"></i> Email</Form.Label>
                     <Col sm={10}>
                         <Form.Control
+                            style={{ border: 'none', borderBottom: '1px solid grey', borderRadius: '0' }}
                             type="email"
                             placeholder="Email Address"
                             value={email}
@@ -135,10 +156,11 @@ function AddAccountHolder() {
                         />
                     </Col>
                 </Form.Group>
-                <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
-                    <Form.Label column sm={2}>Address</Form.Label>
+                <Form.Group as={Row} className="mb-2" controlId="formHorizontalPassword">
+                    <Form.Label column sm={2}><i class="fas fa-map-marker-alt"></i> Address</Form.Label>
                     <Col sm={10}>
                         <Form.Control
+                            style={{ border: 'none', borderBottom: '1px solid grey', borderRadius: '0' }}
                             type="text"
                             placeholder="Home Address"
                             value={address}
@@ -146,7 +168,7 @@ function AddAccountHolder() {
                         />
                     </Col>
                 </Form.Group>
-                <Form.Group as={Row} className="mb-3">
+                <Form.Group as={Row} className="mb-2">
                     <Col sm={{ span: 10, offset: 2 }}>
                         <Button variant="dark" type="submit">Submit</Button>
                         <Button variant="warning" onClick={() => history.push('/admin/accountholders')} style={{ marginLeft: '20px' }}>Cancel</Button>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { AuthorizationContext } from '../../AuthorizationContext'
-import { CardDeck, Card, Button, Table } from 'react-bootstrap'
+import { CardDeck, Card, Table } from 'react-bootstrap'
 
 
 function UserProfile() {
@@ -34,8 +34,7 @@ function UserProfile() {
 
     return (
         <div>
-            <h3 className="component-header">User Dashboard</h3>
-            <p style={{ color: 'blue', padding: '50px 0 0 50px' }}>Welcome, {user.firstName} {user.lastName}!</p>
+            <p style={{ color: 'blue', padding: '10px 0 0 50px' }}>Welcome, {user.firstName} {user.lastName}!</p>
             <CardDeck className="wrapper">
                 <Card>
                     <Card.Body>
@@ -48,9 +47,7 @@ function UserProfile() {
                 <Card>
                     <Card.Body>
                         <Card.Title style={{ padding: '10px 0', borderBottom: '3px solid grey' }}>My Balance</Card.Title>
-                        <Card.Text>Savings balance:<br /><code>$1000</code></Card.Text>
-                        <Card.Text>Personal Checking balance: <br /><code>$1000</code></Card.Text>
-                        <Card.Text>Certificate of Deposit balance: <br /><code>$1000</code></Card.Text>
+                        <Card.Text>Total balance:<br /><code>{user.combinedBalance}</code></Card.Text>
                     </Card.Body>
                 </Card>
             </CardDeck>
@@ -66,7 +63,7 @@ function UserProfile() {
                             <th>Opening Date</th>
                         </tr>
                     </thead>
-                    <tbody style={{ textAlign: 'center' }}>
+                    <tbody >
                         {
                             user.personalCheckingAccount != null ? user.personalCheckingAccount.map(pca =>
                                 <tr key={pca.accountNumber}>

@@ -104,7 +104,7 @@ function CDOfferingList() {
                                     </td>
                                     <td>{cdOffering.id}</td>
                                     <td>{cdOffering.interestRate}</td>
-                                    <th>{cdOffering.term}</th>
+                                    <th>{cdOffering.term} Years</th>
                                 </tr>)
                         }
                     </tbody>

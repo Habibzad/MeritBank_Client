@@ -1,14 +1,13 @@
 import { AuthorizationContext } from '../../AuthorizationContext'
 import React, { useState, useContext } from 'react'
 import { Redirect, useHistory } from 'react-router-dom'
-import { Form, Button, Col, Row, Alert } from 'react-bootstrap'
+import { Form, Button, Col, Row } from 'react-bootstrap'
 
 function DepositTransaction() {
-    const [store] = useContext(AuthorizationContext)
+    const [store, setStore] = useContext(AuthorizationContext)
     const isLoggedIn = store.isLoggedIn;
     const role = store.role;
     const jwt = store.jwt
-    const [successMessage, setSuccessMessage] = useState('')
     const history = useHistory();
     const [targetAccount, setTargetAccount] = useState('')
     const [description, setDescription] = useState('')
@@ -40,7 +39,7 @@ function DepositTransaction() {
             .then(response => response.json())
             .then(result => {
                 console.log(result)
-                setSuccessMessage('Ammount deposited successfully!')
+                setStore({ ...store, successMessage: "Deposit transaction successfull!" })
                 history.push('/admin/transactions')
             })
             .catch(error => console.log('error', error));

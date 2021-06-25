@@ -62,10 +62,6 @@ function AccountHolders() {
             .catch(error => console.log('error', error));
     }
 
-    const updateAccountHolder = (id) => {
-        console.log(id)
-    }
-
     if (!isLoggedIn && role !== "[ROLE_ADMIN]") {
         return <Redirect to="/user" />
     }

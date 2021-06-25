@@ -64,18 +64,21 @@ function UsersList() {
         setTimeout(() => setStore({ ...store, successMessage: '' }), 2000)
     }
 
+    let counter = 1;
+
     return (
         <div>
+            <h3 className="component-header">Users List</h3>
             {successMessage &&
                 <Alert className="alert" variant='success'>{successMessage}</Alert>}
-            <h3 className="component-header">Users List</h3>
-
             <div className="wrapper">
                 <Table striped bordered hover style={{ backgroundColor: 'white', textAlign: 'center' }}>
                     <thead>
                         <tr>
+                            <th><i class="fas fa-hashtag"></i></th>
                             <th>
-                                <Link to={`create-user`}><i className="fas fa-plus text-primary" style={{ cursor: 'pointer' }}></i></Link>
+                                Update/Delete
+                                {/* <Link to={`create-user/${6}`}><i className="fas fa-plus text-primary" style={{ cursor: 'pointer' }}></i></Link> */}
                             </th>
                             <th>ID</th>
                             <th>Username</th>
@@ -88,6 +91,7 @@ function UsersList() {
                         {
                             users.map(user =>
                                 <tr key={user.id}>
+                                    <td>{counter++}</td>
                                     <td>
                                         <Link to={`udate-user/${user.id}`}><i className="fas fa-pencil-alt text-warning" style={{ marginRight: '30px', cursor: 'pointer' }}></i></Link>
                                         <i className="fas fa-user-slash text-danger" style={{ cursor: 'pointer' }}

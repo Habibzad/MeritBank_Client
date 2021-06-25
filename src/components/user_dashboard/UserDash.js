@@ -12,12 +12,15 @@ import {
 
 //Components
 import UserProfile from './UserProfile'
-import UserAccounts from './UserAccounts'
 import UserCDOffering from './UserCDOffering'
 import Logout from '../shared/Logout';
+import Accounts from './Accounts';
+import UserTransfer from './UserTransfer';
+
 //Component URLs
 const cdOfferings = '/cd-offerings'
-const accounts = './accounts'
+const openChecking = '/checkingAcc'
+const transfer = '/transfer'
 
 function UserDash() {
     const [store] = useContext(AuthorizationContext)
@@ -44,7 +47,6 @@ function UserDash() {
                                 :
                                 null
                         }
-
                     </Navbar.Collapse>
                 </Navbar>
                 <Navbar bg="" variant="" className="admin-header">
@@ -63,19 +65,24 @@ function UserDash() {
                 </Navbar>
                 <Navbar bg="" variant="" className="menu">
                     <Link className="dash-menu" active to={url}>Home</Link>
-                    <Link className="dash-menu" active to={url + accounts}>Accounts</Link>
+                    <Link className="dash-menu" active to={url + openChecking}>Accounts</Link>
+                    <Link className="dash-menu" active to={url + transfer}>Send Money</Link>
                     <Link className="dash-menu" active to={url + cdOfferings}>CD Offerings</Link>
                 </Navbar>
                 <Jumbotron className="menu1">
+                    <h3 className="component-header">Dashboard</h3>
                     <Switch>
                         <Route exact path={url}>
                             <UserProfile />
                         </Route>
-                        <Route exact path={url + accounts}>
-                            <UserAccounts />
+                        <Route exact path={url + openChecking}>
+                            <Accounts />
                         </Route>
                         <Route path={url + cdOfferings}>
                             <UserCDOffering />
+                        </Route>
+                        <Route path={url + transfer}>
+                            <UserTransfer />
                         </Route>
                     </Switch>
                 </Jumbotron>

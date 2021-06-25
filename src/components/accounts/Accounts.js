@@ -81,30 +81,27 @@ function Accounts() {
         setTimeout(() => setStore({ ...store, errorMessage: '' }), 3000)
     }
 
+    let counter = 0;
+
     return (
-        <div className="container">
-            <h3 className="component-header">Accounts</h3>
-            <div className="wrapper">
+        <div className="">
+            <h3 className="transfer-header"><i class="fas fa-chevron-circle-right"></i> Accounts</h3>
+            <div className="">
                 {successMessage &&
                     <Alert className="alert" variant='success'>{successMessage}</Alert>}
                 {errorMessage &&
-                    <Alert variant='warning'>{errorMessage}</Alert>}
+                    <Alert variant='danger'>{errorMessage}</Alert>}
                 <Table style={{ backgroundColor: 'white', textAlign: 'center' }} className="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>
-                                <i
-                                    className="fas fa-plus text-primary"
-                                    style={{ cursor: 'pointer' }}
-                                    onClick={() => history.push('/admin/add-account')}>
-                                </i>
-                            </th>
-                            <th>Account Number</th>
+                            <th><i class="fas fa-hashtag fa-col"></i></th>
+                            <th>Account <i class="fas fa-hashtag"></i></th>
                             <th>Balance</th>
                             <th>Interest Rate</th>
                             <th>Opening Date</th>
                             <th>Account Type</th>
                             <th>Close Account</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody >
@@ -112,8 +109,18 @@ function Accounts() {
                             accounts.map(account =>
                                 account.status === "OPEN" ?
                                     <tr key={account.accountNumber}>
+                                        <td>{++counter}</td>
+                                        <td>{account.accountNumber}</td>
+                                        <td>${account.balance}</td>
+                                        <td>{account.interestRate}%</td>
+                                        <td>{account.openingDate}</td>
+                                        <td>{account.accountType}</td>
+                                        <td style={{ color: 'blue', cursor: 'pointer' }} onClick={() => {
+                                            if (window.confirm(`Are you sure you want to close account number: ${account.accountNumber}`)) {
+                                                closeAccount(account.accountNumber);
+                                            }
+                                        }}>Close Account</td>
                                         <td>
-                                            {/* <i className="fas fa-pencil-alt text-warning" onClick={() => updateAccount(account.accountNumber)} style={{ marginRight: '30px', cursor: 'pointer' }}></i> */}
                                             <i className="fas fa-user-slash text-danger" style={{ cursor: 'pointer' }}
                                                 onClick={() => {
                                                     if (window.confirm(`Are you sure you want to delete account: ${account.accountNumber}`)) {
@@ -122,16 +129,6 @@ function Accounts() {
                                                 }}>
                                             </i>
                                         </td>
-                                        <td>{account.accountNumber}</td>
-                                        <td>${account.balance}</td>
-                                        <td>{account.interestRate * 100}%</td>
-                                        <td>{account.openingDate}</td>
-                                        <td>{account.accountType}</td>
-                                        <td style={{ color: 'blue', cursor: 'pointer' }} onClick={() => {
-                                            if (window.confirm(`Are you sure you want to close account number: ${account.accountNumber}`)) {
-                                                closeAccount(account.accountNumber);
-                                            }
-                                        }}>Close Account</td>
                                     </tr> : null)
                         }
                     </tbody>

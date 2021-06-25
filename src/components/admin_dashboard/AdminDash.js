@@ -28,10 +28,9 @@ import Transactions from '../transactions/Transactions'
 import TransferTransaction from '../transactions/TransferTransaction';
 import DepositTransaction from '../transactions/DepositTransaction';
 import WithdrawTransaction from '../transactions/WithdrawTransaction';
-import Accounts from '../accounts/Accounts';
 import AddAccount from '../accounts/AddAccount';
 import Profile from '../accountholders/Profile';
-import NoMatch from './NoMatch';
+import NoMatch from '../shared/NoMatch';
 import './admin.css'
 
 import Logout from '../shared/Logout';
@@ -41,7 +40,6 @@ const addfferingslist = '/addfferingslist'
 const accountholders = '/accountholders'
 const accounts = '/accounts'
 const addcdofferings = '/addcdofferomg'
-const addAccount = '/add-account'
 const createUser = '/create-user'
 const deleteCDOffering = '/delete-cdoffering'
 const deposit = '/deposit'
@@ -96,11 +94,12 @@ function AdminDash() {
                 </Navbar>
                 <Navbar bg="" variant="" className="menu">
                     <Link className="dash-menu" active to={url}><i className="fas fa-home"></i> Home</Link>
-                    <Link className="dash-menu" to={url + usersList}><i className="fas fa-user"></i> Users</Link>
+                    <Link className="dash-menu" to={url + accountholders} style={{ padding: '5px 5px 0', width: '220px' }}><i class="fas fa-users"></i> AccountHolders</Link>
                     <Link className="dash-menu" to={url + accounts}><i className="fas fa-university"></i> Accounts</Link>
                     <Link className="dash-menu" to={url + trans}><i class="fas fa-money-bill-alt"></i> Transactions</Link>
+                    <Link className="dash-menu" to={url + usersList}><i className="fas fa-user"></i> Users</Link>
                     <Link className="dash-menu" to={url + addfferingslist}>CDOfferings</Link>
-                    <Link className="dash-menu" to={url + accountholders} style={{ padding: '5px 5px 0', width: '220px' }}><i class="fas fa-users"></i> AccountHolders</Link>
+
                 </Navbar>
                 <Jumbotron className="menu1">
                     <Switch>
@@ -110,16 +109,13 @@ function AdminDash() {
                         <Route exact path={url + usersList}>
                             <UsersList />
                         </Route>
-                        <Route exact path={url + createUser}>
+                        <Route exact path={url + createUser + `/:id`}>
                             <CreateUser />
                         </Route>
                         <Route exact path={url + '/udate-user/:id'}>
                             <UpdateUser />
                         </Route>
                         <Route exact path={url + accounts}>
-                            <Accounts />
-                        </Route>
-                        <Route exact path={url + addAccount}>
                             <AddAccount />
                         </Route>
                         <Route exact path={url + updateAccount}>

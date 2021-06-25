@@ -6,7 +6,7 @@ import Landing from './components/landing_page/Landing'
 import Login from './components/login/Login'
 import AdminDashboard from './components/admin_dashboard/AdminDash'
 import UserDashboard from './components/user_dashboard/UserDash'
-import NoMatch from './components/admin_dashboard/NoMatch';
+import NoMatch from './components/shared/NoMatch';
 
 function App() {
     return (

@@ -20,7 +20,7 @@ function Login() {
 
     //Error message disappear after 2 seconds
     if (errorMessage !== '') {
-        setTimeout(() => setStore({ ...store, errorMessage: '' }), 2000)
+        setTimeout(() => setStore({ ...store, errorMessage: '' }), 3000)
     }
     //For page redirect
 
@@ -78,12 +78,13 @@ function Login() {
     return (
         <div className="login" style={{ width: 400, marginTop: '10rem' }}>
             {errorMessage &&
-                <Alert variant='warning'>{errorMessage}</Alert>}
+                <Alert variant='warning'><i class="fas fa-ban" style={{ color: 'red' }}></i> {errorMessage}</Alert>}
             <Form onSubmit={e => handleSubmit(e)}>
                 <h2 className="text-center" style={{ color: '#ec674c', fontSize: '28px' }}>Log In</h2>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>User Name</Form.Label>
                     <Form.Control
+                        required
                         onChange={e => setUsername(e.target.value)}
                         name="username"
                         autoComplete="off"
@@ -95,6 +96,7 @@ function Login() {
                 <Form.Group controlId="formBasicPassword" className="mb-3">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
+                        required
                         onChange={e =>
                             setPassword(e.target.value)}
                         autoComplete="off"

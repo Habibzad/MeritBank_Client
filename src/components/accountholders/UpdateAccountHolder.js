@@ -14,6 +14,7 @@ function UpdateAccountHolder() {
     const [firstName, setFirstName] = useState('')
     const [middleName, setMiddleName] = useState('')
     const [lastName, setLastName] = useState('')
+    const [dob, setDob] = useState('')
     const [ssn, setSSN] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
@@ -37,6 +38,7 @@ function UpdateAccountHolder() {
                 setFirstName(result.firstName)
                 setMiddleName(result.middleName)
                 setLastName(result.lastName)
+                setDob(result.dob)
                 setSSN(result.ssn)
                 setPhone(result.phone)
                 setEmail(result.email)
@@ -65,6 +67,7 @@ function UpdateAccountHolder() {
             "firstName": firstName,
             "middleName": middleName,
             "lastName": lastName,
+            "dob": dob,
             "ssn": ssn,
             "phone": phone,
             "email": email,
@@ -137,6 +140,17 @@ function UpdateAccountHolder() {
                             placeholder="Last Name"
                             value={lastName}
                             onChange={e => setLastName(e.target.value)}
+                        />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-2" controlId="formHorizontalPassword">
+                    <Form.Label column sm={2}><i class="fas fa-calendar-alt"></i> Date of Birth</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            type="date"
+                            placeholder="Date of birth"
+                            value={dob}
+                            onChange={e => setDob(e.target.value)}
                         />
                     </Col>
                 </Form.Group>
