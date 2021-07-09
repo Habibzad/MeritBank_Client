@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/MeritBank_Client/static/css/main.6e365973.chunk.css",
-    "main.js": "/MeritBank_Client/static/js/main.7f22a7b9.chunk.js",
-    "main.js.map": "/MeritBank_Client/static/js/main.7f22a7b9.chunk.js.map",
-    "runtime-main.js": "/MeritBank_Client/static/js/runtime-main.03df1bff.js",
-    "runtime-main.js.map": "/MeritBank_Client/static/js/runtime-main.03df1bff.js.map",
-    "static/js/2.b35f37c8.chunk.js": "/MeritBank_Client/static/js/2.b35f37c8.chunk.js",
-    "static/js/2.b35f37c8.chunk.js.map": "/MeritBank_Client/static/js/2.b35f37c8.chunk.js.map",
-    "index.html": "/MeritBank_Client/index.html",
-    "static/css/main.6e365973.chunk.css.map": "/MeritBank_Client/static/css/main.6e365973.chunk.css.map",
-    "static/js/2.b35f37c8.chunk.js.LICENSE.txt": "/MeritBank_Client/static/js/2.b35f37c8.chunk.js.LICENSE.txt"
+    "main.css": "/static/css/main.6e365973.chunk.css",
+    "main.js": "/static/js/main.7f22a7b9.chunk.js",
+    "main.js.map": "/static/js/main.7f22a7b9.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ab6d2c44.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ab6d2c44.js.map",
+    "static/js/2.b35f37c8.chunk.js": "/static/js/2.b35f37c8.chunk.js",
+    "static/js/2.b35f37c8.chunk.js.map": "/static/js/2.b35f37c8.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.6e365973.chunk.css.map": "/static/css/main.6e365973.chunk.css.map",
+    "static/js/2.b35f37c8.chunk.js.LICENSE.txt": "/static/js/2.b35f37c8.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.03df1bff.js",
+    "static/js/runtime-main.ab6d2c44.js",
     "static/js/2.b35f37c8.chunk.js",
     "static/css/main.6e365973.chunk.css",
     "static/js/main.7f22a7b9.chunk.js"
