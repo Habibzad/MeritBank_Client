@@ -1,6 +1,7 @@
 :root {
---bg-primary: #C84B31;
---bg-secondary: #ec674c;
+/* --bg-primary: #C84B31; */
+--bg-primary: #192F43;
+--bg-secondary: #21405c;
 --bg-light: #fdfaee;
 --bg-dark: #414141;
 --bg-component-light: f8f8f8;
@@ -34,7 +35,7 @@ body {
 .add-account-dash{
   border: 1px solid #dbdbdb;
   padding: 0;
-  background-color: #ec674c;
+  background-color: var(--bg-primary);
   display: flex;
   flex-direction: column;
   margin: 0 0 0 15px;

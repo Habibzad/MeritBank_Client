@@ -4,7 +4,7 @@
     /* background: linear-gradient(25deg,rgb(206, 18, 18),rgba(240, 84, 84, 0.3)) */
 }
 .b12{
-  background: url('https://www.pinsentmasons.com/-/media/images/special-reports/openbanking-1440x700.jpg?h=583&la=en-gb&w=1200&hash=90BA1A8132AB74B2316FA934A39E1097') top center / cover no-repeat;
+  background: url('https://www.pega.com/sites/default/files/styles/1920/public/media/images/2018-07/fs-top-level-page-header.jpg?itok=AEsf7ir9') top center / cover no-repeat;
 }
 .b14{
   margin-top: -310px
@@ -31,7 +31,7 @@
   border-bottom: 5px solid #ffffff;
   height: 100%;
   width: 100px;
-  color: #ec674c;
+  color: #192F43;
   text-align: center;
   margin-left: 10px;
   padding-bottom: 5px;
@@ -40,13 +40,13 @@
 
 .nav-link-header:hover{
   text-decoration: none;
-  border-bottom: 5px solid #ec674c;
-  color: #ec674c;
+  border-bottom: 5px solid #192F43;
+  color: #192F43;
 }
 
 
 .landing-text{
-  color: var(--bg-primary);
+  color: #ffffff;
 }
 
 .landing-jumbo{
@@ -59,5 +59,10 @@
 
 .footer-link:hover{
   color: #ffffff;
+}
+
+.landing-page-offerings{
+  background-color: #192F43;
+  color: #fcce02;
 }
   
