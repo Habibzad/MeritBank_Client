@@ -37,7 +37,7 @@ function Login() {
 
     //Call the authentication endpoint
     axios
-      .post("https://merit-bank.herokuapp.com/api/authenticate", user)
+      .post(BASE_URL_ADD, user)
       .then((res) => {
         const jwt = res.data.jwt;
         const role = res.data.roles;
