@@ -29,7 +29,7 @@ function Accounts() {
       redirect: "follow",
     };
 
-    fetch("http://localhost:8080/api/all-accounts", requestOptions)
+    fetch("https://merit-bank.herokuapp.com/api/all-accounts", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setAccounts(result);
@@ -52,7 +52,10 @@ function Accounts() {
       redirect: "follow",
     };
 
-    fetch(`http://localhost:8080/api/close-account/${id}`, requestOptions)
+    fetch(
+      `https://merit-bank.herokuapp.com/api/close-account/${id}`,
+      requestOptions
+    )
       .then((response) => response.json())
       .then((result) => {
         console.log("close account", result);
